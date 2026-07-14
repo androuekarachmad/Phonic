@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PHONIC - Learning Adventure</title>
+  <link rel="icon" href="assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/global/variables.css">
+  <link rel="stylesheet" href="css/global/global.css">
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .splash-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(150deg, #c8dfff 0%, #437eeb 60%, #6c3cdd 100%);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Decorative Shapes */
+    .splash-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(50px);
+      z-index: 0;
+    }
+
+    .shape-1 {
+      width: 280px;
+      height: 280px;
+      background: rgba(255, 255, 255, 0.25);
+      top: -80px;
+      left: -80px;
+      animation: pulse 7s ease-in-out infinite alternate;
+    }
+
+    .shape-2 {
+      width: 360px;
+      height: 360px;
+      background: rgba(139, 92, 246, 0.25);
+      bottom: -120px;
+      right: -100px;
+      animation: pulse 9s ease-in-out 2s infinite alternate-reverse;
+    }
+
+    /* Content */
+    .splash-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .splash-logo {
+      height: 60px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+      animation: scale-in 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      opacity: 0;
+    }
+
+    .splash-mascot {
+      width: 140px;
+      margin-top: 8px;
+      animation: pop-up 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s both, float 4s ease-in-out 1.4s infinite;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.2));
+    }
+
+    .splash-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-top: 40px;
+      animation: fade-in 0.8s ease 1.3s both;
+    }
+
+    .spinner {
+      width: 30px;
+      height: 30px;
+      border: 3px solid rgba(255, 255, 255, 0.35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+
+    .loading-text {
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.4px;
+    }
+
+    /* Keyframes */
+    @keyframes scale-in {
+      0%   { transform: scale(0.75); opacity: 0; }
+      100% { transform: scale(1);    opacity: 1; }
+    }
+
+    @keyframes pop-up {
+      0%   { transform: scale(0) translateY(24px); opacity: 0; }
+      70%  { transform: scale(1.08) translateY(-8px); opacity: 1; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(1.2); opacity: 0.4; }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(0px) rotate(0deg); }
+      50%  { transform: translateY(-10px) rotate(4deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="splash-container">
+    <div class="splash-shape shape-1"></div>
+    <div class="splash-shape shape-2"></div>
+    
+    <div class="splash-content">
+      <img src="assets/images/logo/phonic_name_logo.png" alt="PHONIC Logo" class="splash-logo">
+      <img src="assets/images/mascot/mascot-home.png" alt="VOXY Mascot" class="splash-mascot">
+      
+      <div class="splash-loading">
+        <div class="spinner"></div>
+        <p class="loading-text">Menyiapkan petualangan belajarmu...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Dependencies -->
+  <script src="js/data/users.js"></script>
+  <script src="js/core/auth.js"></script>
+  <script>
+    // Wait for full animation to play, then auto-route based on session
+    document.addEventListener('DOMContentLoaded', () => {
+      Auth.initSplash(2800);
+    });
+  </script>
+</body>
+</html>

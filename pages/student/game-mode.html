@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Game Mode</title>
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+  
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../../css/components/button.css">
+  <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/instruction-modal.css">
+  
+  <!-- Page Specific Styles -->
+  <link rel="stylesheet" href="../../css/student/game-mode.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body>
+
+  <div class="container game-mode-container">
+    
+    <!-- Header Section -->
+    <header class="game-mode-header">
+      <a href="games.html" class="icon-btn btn-back">
+        <i class="ph ph-caret-left"></i>
+      </a>
+      <h1 class="page-title">Game Mode</h1>
+      <div style="width: 44px;"></div> <!-- Spacer for flex balance -->
+    </header>
+
+    <!-- Slider Section -->
+    <div class="slider-wrapper">
+      <button class="nav-arrow left-arrow" id="prevModeBtn">
+        <i class="ph ph-caret-left"></i>
+      </button>
+
+      <div class="mascot-slider">
+        <!-- We use one image and change it via JS, or we can use a container and slide -->
+        <img src="../../assets/images/mascot/mascot-game.png" alt="Mascot" id="modeMascot" class="mode-mascot-img">
+      </div>
+
+      <button class="nav-arrow right-arrow" id="nextModeBtn">
+        <i class="ph ph-caret-right"></i>
+      </button>
+    </div>
+
+    <!-- Mode Info -->
+    <div class="mode-info">
+      <h2 id="modeTitle" class="mode-title">Easy</h2>
+      <p id="modeDesc" class="mode-desc">Mode ini memiliki jumlah kata yang lebih sedikit.</p>
+    </div>
+
+    <!-- Start Button -->
+    <div class="action-container">
+      <button class="btn btn-primary btn-start" id="startBtn">START</button>
+    </div>
+
+  </div>
+
+  <!-- Instruction Modal Component -->
+  <div data-component="../../components/instruction-modal.html"></div>
+
+  <!-- Core Scripts -->
+    <!-- Auth Guard — must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+  
+  <!-- Page Scripts -->
+  <script src="../../js/components/instruction-modal.js"></script>
+  <script src="../../js/student/game-mode.js"></script>
+</body>
+</html>

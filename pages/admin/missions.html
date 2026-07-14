@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Mission Management</title>
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/variables.css">
+  <link rel="stylesheet" href="../../css/global/global.css">
+  <link rel="stylesheet" href="../../css/global/animation.css">
+  
+  <!-- Component -->
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  
+  <!-- Shared Admin Styles -->
+  <link rel="stylesheet" href="../../css/admin/dashboard.css">
+  <link rel="stylesheet" href="../../css/admin/students.css">
+  
+  <!-- Page Specific -->
+  <link rel="stylesheet" href="../../css/admin/missions.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body class="admin-body">
+
+  <main class="admin-main">
+    
+    <!-- ░░ TOP SECTION ░░ -->
+    <div class="adm-top-section std-top">
+      
+      <header class="adm-header">
+        <div class="adm-header__left">
+          <button class="adm-icon-btn" onclick="history.back()" aria-label="Kembali">
+            <i class="ph ph-caret-left"></i>
+          </button>
+          <div class="adm-header__text-group">
+            <p class="adm-header__sub">Manajemen</p>
+            <h1 class="adm-header__name">Missions</h1>
+          </div>
+        </div>
+        <div class="adm-header__right">
+          <button class="adm-icon-btn" id="btnAddMission" aria-label="Tambah Mission">
+            <i class="ph-bold ph-plus"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="adm-search" style="margin-bottom:0;">
+        <i class="ph ph-magnifying-glass adm-search__icon"></i>
+        <input
+          type="search"
+          id="searchInput"
+          class="adm-search__input"
+          placeholder="Cari Mission..."
+          aria-label="Cari"
+        >
+      </div>
+    </div>
+
+    <!-- ░░ CONTENT ░░ -->
+    <div class="adm-content-area" style="padding-top: var(--space-md);">
+      
+      <!-- SUMMARY -->
+      <div class="ms-summary">
+        <div class="ms-stat-card">
+          <div class="ms-stat-icon all"><i class="ph-fill ph-clipboard-text"></i></div>
+          <div>
+            <div class="ms-stat-val" id="statTotal">0</div>
+            <div class="ms-stat-lbl">Total Mission</div>
+          </div>
+        </div>
+        <div class="ms-stat-card">
+          <div class="ms-stat-icon daily"><i class="ph-fill ph-sun"></i></div>
+          <div>
+            <div class="ms-stat-val" id="statDaily">0</div>
+            <div class="ms-stat-lbl">Daily</div>
+          </div>
+        </div>
+        <div class="ms-stat-card">
+          <div class="ms-stat-icon weekly"><i class="ph-fill ph-calendar-blank"></i></div>
+          <div>
+            <div class="ms-stat-val" id="statWeekly">0</div>
+            <div class="ms-stat-lbl">Weekly</div>
+          </div>
+        </div>
+        <div class="ms-stat-card">
+          <div class="ms-stat-icon special"><i class="ph-fill ph-star"></i></div>
+          <div>
+            <div class="ms-stat-val" id="statSpecial">0</div>
+            <div class="ms-stat-lbl">Special</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="std-filters" style="margin-bottom: var(--space-lg);">
+        <div class="std-filter-scroll">
+          <button class="std-chip active" data-filter-type="category" data-filter-val="all">Semua</button>
+          <button class="std-chip" data-filter-type="category" data-filter-val="Daily">Daily</button>
+          <button class="std-chip" data-filter-type="category" data-filter-val="Weekly">Weekly</button>
+          <button class="std-chip" data-filter-type="category" data-filter-val="Special">Special</button>
+        </div>
+        <div class="std-filter-scroll">
+          <button class="std-chip active" data-filter-type="status" data-filter-val="all">Semua Status</button>
+          <button class="std-chip" data-filter-type="status" data-filter-val="Aktif">Aktif</button>
+          <button class="std-chip" data-filter-type="status" data-filter-val="Nonaktif">Nonaktif</button>
+        </div>
+      </div>
+
+      <!-- MISSION GRID -->
+      <div class="ms-grid" id="missionContainer"></div>
+
+      <!-- EMPTY STATE -->
+      <div class="std-empty hidden" id="emptyState">
+        <img src="../../assets/images/mascot/mascot-home.png" alt="Voxy" class="std-empty__img">
+        <h3 class="std-empty__title">Belum ada misi</h3>
+        <p class="std-empty__desc">Tambahkan misi baru atau ubah filter pencarian.</p>
+      </div>
+
+    </div>
+    <div style="height:40px;"></div>
+  </main>
+
+  <!-- ░░ BOTTOM NAVIGATION ░░ -->
+  <div data-component="../../components/bottom-nav.html"></div>
+
+  <!-- ──────────────── MODALS ──────────────── -->
+
+  <!-- PREVIEW MODAL -->
+  <div class="ms-modal" id="previewModal">
+    <div class="ms-modal__backdrop" id="previewBackdrop"></div>
+    <div class="ms-modal__content">
+      <button class="ms-modal__close" id="previewClose"><i class="ph ph-x"></i></button>
+
+      <div class="ms-preview">
+        <div class="ms-preview__header" id="previewHeaderBg">
+          <i id="previewIcon" class="ph-fill ph-star"></i>
+          <span class="ms-preview__badge" id="previewCategory">Daily</span>
+        </div>
+        <div class="ms-preview__body">
+          <h3 class="ms-preview__title" id="previewTitle">Judul Mission</h3>
+          <p class="ms-preview__desc" id="previewDesc">Deskripsi lengkap dari misi ini.</p>
+          
+          <div class="ms-preview__info-grid">
+            <div class="ms-info-item">
+              <i class="ph-fill ph-target"></i>
+              <div>
+                <span>Target</span>
+                <strong id="previewTarget">Target</strong>
+              </div>
+            </div>
+            <div class="ms-info-item">
+              <i class="ph-fill ph-lightning"></i>
+              <div>
+                <span>XP Reward</span>
+                <strong id="previewXp">0 XP</strong>
+              </div>
+            </div>
+            <div class="ms-info-item">
+              <i class="ph-fill ph-sticker"></i>
+              <div>
+                <span>Sticker</span>
+                <strong id="previewSticker">0</strong>
+              </div>
+            </div>
+            <div class="ms-info-item">
+              <i class="ph-fill ph-toggle-left"></i>
+              <div>
+                <span>Status</span>
+                <strong id="previewStatus">Aktif</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD/EDIT MODAL -->
+  <div class="ms-modal" id="formModal">
+    <div class="ms-modal__backdrop" id="formBackdrop"></div>
+    <div class="ms-modal__content">
+      <button class="ms-modal__close" id="formClose"><i class="ph ph-x"></i></button>
+      <h3 class="ms-modal__title" id="formTitle">Tambah Mission</h3>
+
+      <form class="ms-form" id="missionForm">
+        <input type="hidden" id="formId">
+
+        <div class="ms-form__group">
+          <label>Nama Mission</label>
+          <input id="formTitle2" type="text" class="ms-input" placeholder="Contoh: Membaca Buku Pemula" required>
+        </div>
+
+        <div class="ms-form__group">
+          <label>Deskripsi</label>
+          <textarea id="formDesc" class="ms-input" rows="2" placeholder="Tuliskan deskripsi misi..." required></textarea>
+        </div>
+
+        <div class="ms-form__row">
+          <div class="ms-form__group">
+            <label>Kategori</label>
+            <select id="formCategory" class="ms-input" required>
+              <option value="Daily">Daily (Harian)</option>
+              <option value="Weekly">Weekly (Mingguan)</option>
+              <option value="Special">Special (Spesial)</option>
+            </select>
+          </div>
+          <div class="ms-form__group">
+            <label>Target</label>
+            <input id="formTarget" type="text" class="ms-input" placeholder="Misal: 1 Buku" required>
+          </div>
+        </div>
+
+        <div class="ms-form__row">
+          <div class="ms-form__group">
+            <label>XP Reward</label>
+            <input id="formXp" type="number" class="ms-input" min="0" placeholder="50" required>
+          </div>
+          <div class="ms-form__group">
+            <label>Sticker Reward</label>
+            <input id="formSticker" type="number" class="ms-input" min="0" placeholder="0" required>
+          </div>
+        </div>
+
+        <div class="ms-form__group">
+          <label>Status</label>
+          <select id="formStatus" class="ms-input" required>
+            <option value="Aktif">Aktif</option>
+            <option value="Nonaktif">Nonaktif</option>
+          </select>
+        </div>
+
+        <div class="ms-form__actions">
+          <button type="button" class="ms-btn-secondary" id="formCancel">Batal</button>
+          <button type="submit" class="ms-btn-primary"><i class="ph-bold ph-floppy-disk"></i> Simpan Mission</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div class="ms-modal" id="deleteModal">
+    <div class="ms-modal__backdrop" id="deleteBackdrop"></div>
+    <div class="ms-modal__content ms-modal__content--sm">
+      <div class="ms-modal__icon-alert"><i class="ph-fill ph-trash"></i></div>
+      <h3>Hapus Mission?</h3>
+      <p>Mission ini akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.</p>
+      <div class="ms-form__actions">
+        <button class="ms-btn-secondary" id="btnCancelDelete">Batal</button>
+        <button class="ms-btn-danger" id="btnConfirmDelete">Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/missions-data.js"></script>
+    <!-- Auth Guard � must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('admin');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+  <script src="../../js/admin/admin-navbar.js"></script>
+  <script src="../../js/admin/missions.js"></script>
+</body>
+</html>

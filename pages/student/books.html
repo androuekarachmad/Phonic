@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Books</title>
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+
+  <!-- Page Styles -->
+  <link rel="stylesheet" href="../../css/student/books.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body>
+
+  <div class="container books-page">
+
+    <!-- Header -->
+    <header class="books-header">
+      <button class="books-header__btn" onclick="window.location.href='home.html'" aria-label="Back">
+        <i class="ph ph-caret-left"></i>
+      </button>
+      <h1 class="books-header__title">Books</h1>
+      <button class="books-header__btn" aria-label="Search">
+        <i class="ph ph-magnifying-glass"></i>
+      </button>
+    </header>
+
+    <!-- Book List -->
+    <main class="books-grid" id="booksGrid">
+      <!-- Rendered by JS -->
+    </main>
+
+  </div>
+
+  <!-- Auth Guard — must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+    <!-- Scripts -->
+  <script src="../../js/data/books.js"></script>
+  <script src="../../js/student/books.js"></script>
+</body>
+</html>

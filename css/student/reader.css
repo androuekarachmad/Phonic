@@ -1,0 +1,274 @@
+/* css/student/reader.css */
+
+/* ========== FULLSCREEN READER ========== */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.reader {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background: #f8fafc;
+}
+
+/* ========== HEADER ========== */
+.reader-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.reader-header > * {
+  pointer-events: auto;
+}
+
+.reader-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid #dfe4ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: background 0.2s, transform 0.15s;
+}
+
+.reader-btn:hover {
+  background: #fff;
+  transform: scale(1.05);
+}
+
+.reader-btn:active {
+  transform: scale(0.95);
+}
+
+.reader-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========== VIEWPORT ========== */
+.reader-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 60px 0;
+}
+
+.reader-page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.reader-page--exit {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+.reader-page--enter {
+  opacity: 0;
+  transform: scale(1.03);
+}
+
+.reader-page__img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ========== VOCABULARY OVERLAYS ========== */
+.reader-vocab-overlays {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ========== VOCABULARY POPUP ========== */
+.vocab-popup {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 100;
+}
+
+.vocab-popup--visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.vocab-popup__card {
+  background: linear-gradient(135deg, #3b6de0 0%, #2451b8 100%);
+  border-radius: 16px;
+  padding: 14px 20px;
+  color: #fff;
+  min-width: 240px;
+  box-shadow: 0 12px 32px rgba(42, 81, 184, 0.35);
+}
+
+.vocab-popup__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.vocab-popup__speaker {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.vocab-popup__speaker:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.vocab-popup__pronunciation {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.vocab-popup__hint {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.85;
+  line-height: 1.5;
+  padding-left: 46px; /* Align with text after speaker button */
+}
+
+/* ========== AUDIO PLAYER ========== */
+.reader-audio {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.reader-audio__controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #fff;
+  padding: 10px 28px;
+  border-radius: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.reader-audio__btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.reader-audio__btn:hover {
+  transform: scale(1.15);
+}
+
+.reader-audio__btn--play {
+  font-size: 32px;
+  color: var(--color-primary-dark);
+}
+
+.reader-audio__msg {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-secondary, #f59e0b);
+  text-align: center;
+}
+
+/* ========== FOOTER ========== */
+.reader-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  z-index: 30;
+}
+
+.reader-footer__page {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 6px 18px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (min-width: 768px) {
+  .reader-page__img {
+    max-width: 560px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .reader-page__img {
+    max-width: 720px;
+  }
+}

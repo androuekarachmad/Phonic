@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Reader</title>
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+
+  <!-- Page Styles -->
+  <link rel="stylesheet" href="../../css/student/reader.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body>
+
+  <div class="reader" id="reader">
+
+    <!-- Header -->
+    <header class="reader-header">
+      <button class="reader-btn" id="btnClose" aria-label="Close">
+        <i class="ph ph-x"></i>
+      </button>
+      <button class="reader-btn" id="btnSpeaker" aria-label="Audio" style="visibility: hidden;">
+        <i class="ph ph-speaker-high"></i>
+      </button>
+    </header>
+
+    <!-- Page Content -->
+    <main class="reader-viewport">
+      <div class="reader-page" id="readerPage">
+        <img class="reader-page__img" id="pageImg" src="" alt="Book page">
+      </div>
+
+      <!-- Vocabulary Overlay (shown on vocabulary pages) -->
+      <div class="reader-vocab-overlays" id="vocabOverlays"></div>
+    </main>
+
+    <!-- Song Audio Player -->
+    <div class="reader-audio" id="audioPlayer" style="display: none;">
+      <div class="reader-audio__controls">
+        <button class="reader-audio__btn" id="audioRewind"><i class="ph-fill ph-rewind"></i></button>
+        <button class="reader-audio__btn reader-audio__btn--play" id="audioPlayPause"><i class="ph-fill ph-play"></i></button>
+        <button class="reader-audio__btn" id="audioForward"><i class="ph-fill ph-fast-forward"></i></button>
+      </div>
+      <p class="reader-audio__msg" id="audioMsg"></p>
+      <audio id="audioElement"></audio>
+    </div>
+
+    <!-- Footer -->
+    <footer class="reader-footer">
+      <button class="reader-btn" id="btnPrev" aria-label="Previous">
+        <i class="ph ph-caret-left"></i>
+      </button>
+      <span class="reader-footer__page" id="pageIndicator">1 / 1</span>
+      <button class="reader-btn" id="btnNext" aria-label="Next">
+        <i class="ph ph-caret-right"></i>
+      </button>
+    </footer>
+
+    <!-- Vocabulary Popup -->
+    <div class="vocab-popup" id="vocabPopup">
+      <div class="vocab-popup__card">
+        <div class="vocab-popup__row">
+          <button class="vocab-popup__speaker" id="vocabSpeak" aria-label="Speak">
+            <i class="ph-fill ph-speaker-high"></i>
+          </button>
+          <span class="vocab-popup__pronunciation" id="vocabPronunciation"></span>
+        </div>
+        <p class="vocab-popup__hint" id="vocabMeaning"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Auth Guard — must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+    <!-- Scripts -->
+  <script src="../../js/data/books.js"></script>
+  <script src="../../js/student/reader.js"></script>
+</body>
+</html>

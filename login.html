@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Masuk - PHONIC</title>
+  <link rel="icon" href="assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/global/variables.css">
+  <link rel="stylesheet" href="css/global/global.css">
+  <link rel="stylesheet" href="css/components/card.css">
+  <link rel="stylesheet" href="css/components/form.css">
+  <link rel="stylesheet" href="css/components/button.css">
+  <link rel="stylesheet" href="css/components/toast.css">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+
+      <div class="auth-header">
+        <img src="assets/images/logo/phonic_name_logo.png" alt="PHONIC Logo" class="auth-logo">
+        <h1 class="auth-title">Masuk</h1>
+      </div>
+
+      <form id="loginForm" novalidate>
+
+        <!-- Username -->
+        <div class="form-group">
+          <label class="form-label" for="username">Username / NISN</label>
+          <div class="input-wrapper">
+            <i class="ph-fill ph-user input-icon"></i>
+            <input
+              type="text"
+              id="username"
+              class="form-input"
+              placeholder="Masukkan Username / NISN"
+              autocomplete="username"
+            >
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-wrapper">
+            <i class="ph-fill ph-lock-key input-icon"></i>
+            <input
+              type="password"
+              id="password"
+              class="form-input"
+              placeholder="Masukkan Password"
+              autocomplete="current-password"
+            >
+          </div>
+        </div>
+
+        <!-- Remember Me -->
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 28px;">
+          <label class="checkbox-group">
+            <input type="checkbox" id="rememberMe">
+            <span class="checkbox-label">Ingatkan saya</span>
+          </label>
+          <a href="#" class="form-link" style="font-size:14px;">Lupa password?</a>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-auth" id="loginBtn">
+          <i class="ph-fill ph-sign-in"></i> Masuk
+        </button>
+
+        <p class="form-helper">
+          Belum punya akun? <a href="signup.html" class="form-link">Daftar di sini</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts: order matters — users.js before auth.js -->
+  <script src="js/data/users.js"></script>
+  <script src="js/core/auth.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // If already logged in, redirect immediately
+      if (Auth.isLoggedIn()) {
+        Auth.redirectByRole();
+        return;
+      }
+
+      const form   = document.getElementById('loginForm');
+      const btnLogin = document.getElementById('loginBtn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const remember = document.getElementById('rememberMe').checked;
+
+        // Field validation
+        if (!username) { Toast.error('Harap masukkan username atau NISN.'); return; }
+        if (!password) { Toast.error('Harap masukkan password.'); return; }
+
+        btnLogin.classList.add('loading');
+
+        try {
+          const user = await Auth.login(username, password, remember);
+          Toast.success(`Halo, ${user.name}! Selamat datang kembali 👋`);
+          setTimeout(() => Auth.redirectByRole(), 900);
+        } catch (err) {
+          Toast.error(err.message || 'Login gagal. Coba lagi.');
+          btnLogin.classList.remove('loading');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

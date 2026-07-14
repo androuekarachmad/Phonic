@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Level</title>
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  <link rel="stylesheet" href="../../css/components/quest-card.css">
+  <link rel="stylesheet" href="../../css/components/modal.css">
+
+  <!-- Page Specific Styles -->
+  <link rel="stylesheet" href="../../css/student/level.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body>
+
+  <div class="container level-page">
+
+    <!-- ========== HEADER ========== -->
+    <header class="level-header">
+      <div class="level-header__spacer"></div>
+      <h1 class="level-header__title">Level 1</h1>
+      <a href="#" class="level-header__reward-btn" aria-label="Rewards" onclick="openRewardPopup(event); return false;">
+        <i class="ph ph-gift" style="font-size: 24px;"></i>
+      </a>
+    </header>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="level-hero">
+      <!-- Star Illustration -->
+      <div class="level-hero__star">
+        <i class="ph-fill ph-star" style="font-size: 80px; color: #f59f00; filter: drop-shadow(0 8px 16px rgba(245, 159, 0, 0.4));"></i>
+      </div>
+
+      <!-- EXP Progress Bar -->
+      <div class="level-progress">
+        <div class="level-progress__bar">
+          <div class="level-progress__fill" id="expProgressFill" style="width: 0%;"></div>
+          <span class="level-progress__text" id="expProgressText">0 EXP</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== DAILY QUEST ========== -->
+    <section class="quest-section">
+      <h2 class="quest-section__title">Daily quest!</h2>
+
+      <div class="quest-list" id="dailyQuestList">
+        <!-- Quest cards rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ========== SPECIAL QUEST ========== -->
+    <section class="quest-section">
+      <h2 class="quest-section__title">Special quest!</h2>
+
+      <div class="quest-list" id="specialQuestList">
+        <!-- Quest cards rendered by JS -->
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Bottom Navigation (Component Loader) -->
+  <div data-component="../../components/bottom-nav.html"></div>
+
+  <!-- Reward Popup (Component Loader) -->
+  <div data-component="../../components/reward-popup.html"></div>
+
+  <!-- Core Scripts -->
+    <!-- Auth Guard — must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+
+  <!-- Page Scripts -->
+  <script src="../../js/student/level.js"></script>
+</body>
+</html>

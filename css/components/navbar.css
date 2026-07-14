@@ -1,0 +1,88 @@
+/* components/navbar.css */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90px; /* 70px active area + 20px padding for OS bar */
+  padding-bottom: 20px;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  z-index: 100;
+  filter: drop-shadow(0 -4px 10px rgba(0,0,0,0.1));
+}
+
+.nav-bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  z-index: 1; /* Below items */
+}
+
+.nav-indicator {
+  position: absolute;
+  top: -24px;
+  left: 0;
+  width: 64px;
+  height: 64px;
+  background-color: transparent; /* True transparent hole */
+  border-radius: 50%;
+  box-shadow: 0 0 0 200vw var(--color-nav-bg); /* Paints the wrapper */
+  transition: transform 0.4s cubic-bezier(0.5, -0.2, 0.2, 1.2);
+}
+
+/* Inverted curves removed for a perfect circle cutout */
+
+.bottom-nav-item {
+  position: relative;
+  z-index: 2; /* Above wrapper */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 70px;
+  color: var(--color-nav-icon);
+  cursor: pointer;
+}
+
+.icon-wrapper {
+  position: absolute;
+  top: 13px; /* Center in 70px height initially */
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.5, -0.2, 0.2, 1.2), background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.icon-wrapper img,
+.icon-wrapper svg,
+.icon-wrapper i {
+  width: 28px;
+  height: 28px;
+  font-size: 28px; /* For Phosphor font icons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  fill: currentColor;
+  transition: filter 0.3s ease, color 0.3s ease;
+}
+
+/* Active State */
+.bottom-nav-item.active .icon-wrapper {
+  transform: translateY(-30px); /* Pop up into the cutout */
+  background: var(--color-nav-icon-bg-active);
+  box-shadow: 0 4px 12px rgba(63, 124, 246, 0.4);
+}
+

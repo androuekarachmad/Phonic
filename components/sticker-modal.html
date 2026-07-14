@@ -1,0 +1,41 @@
+<!-- components/sticker-modal.html -->
+<div class="modal-backdrop" id="stickerModal">
+  <div class="modal-container">
+    
+    <button class="modal-close-btn" aria-label="Close modal" onclick="closeStickerPopup()">
+      <i class="ph ph-x"></i>
+    </button>
+    
+    <div class="modal-body sticker-modal-body">
+      
+      <!-- Dynamic Sticker Image -->
+      <div class="sticker-modal-image-container">
+        <img src="" alt="Sticker" class="sticker-modal-image" id="stickerModalImage">
+      </div>
+      
+      <!-- Dynamic Sticker Info -->
+      <div class="reward-badge badge-rare" id="stickerModalBadge" style="margin-bottom: var(--space-sm);">
+        Rare
+      </div>
+      
+      <h2 class="sticker-modal-title" id="stickerModalTitle">Sticker Name</h2>
+      <p class="sticker-modal-desc" id="stickerModalDesc">Sticker description goes here.</p>
+      
+      <!-- Meta Information -->
+      <div class="sticker-modal-meta">
+        <div class="meta-row">
+          <span class="meta-label">Rarity</span>
+          <span class="meta-value" id="metaRarity">Rare</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">How to get</span>
+          <span class="meta-value" id="metaHowTo">Unlock at Level 2</span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Scripts for the modal -->
+<script src="../../js/components/modal.js"></script>

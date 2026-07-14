@@ -1,0 +1,102 @@
+<!-- components/reward-popup.html -->
+<div class="modal-backdrop" id="rewardModal">
+  <div class="modal-container">
+    
+    <button class="modal-close-btn" aria-label="Close modal" onclick="closeRewardPopup()">
+      <i class="ph ph-x"></i>
+    </button>
+    
+    <div class="modal-header">
+      <div class="modal-header__icon">
+        <i class="ph ph-gift"></i>
+      </div>
+      <h2 class="modal-header__title">Rewards</h2>
+      <p class="modal-header__subtitle">Collect stickers by completing your level.</p>
+    </div>
+    
+    <div class="modal-body">
+      
+      <!-- Reward Card: Claimed -->
+      <div class="reward-card">
+        <div class="reward-sticker">
+          <img src="../../assets/images/stickers/sticker-level-2.png" alt="Sticker">
+        </div>
+        <div class="reward-info">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
+            <div>
+              <div class="reward-level-tag">⭐ Level 2</div>
+              <h3 class="reward-title">Blue Galaxy</h3>
+            </div>
+            <div class="reward-badge badge-claimed">
+              <i class="ph ph-check"></i>
+              Claimed
+            </div>
+          </div>
+          <p class="reward-desc">Unlock at Level 2</p>
+          <div class="reward-progress">
+            <div class="reward-progress-bar">
+              <div class="reward-progress-fill" style="width: 100%;"></div>
+            </div>
+            <div class="reward-progress-text">100 / 100 EXP</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Reward Card: Claim -->
+      <div class="reward-card">
+        <div class="reward-sticker">
+          <img src="../../assets/images/stickers/sticker-level-3.png" alt="Sticker">
+        </div>
+        <div class="reward-info">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
+            <div>
+              <div class="reward-level-tag">⭐ Level 3</div>
+              <h3 class="reward-title">Star Rider</h3>
+            </div>
+            <div class="reward-badge badge-claim">
+              <i class="ph ph-gift"></i>
+              Claim
+            </div>
+          </div>
+          <p class="reward-desc">Unlock at Level 3</p>
+          <div class="reward-progress">
+            <div class="reward-progress-bar">
+              <div class="reward-progress-fill" style="width: 100%;"></div>
+            </div>
+            <div class="reward-progress-text">150 / 150 EXP</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Reward Card: Locked -->
+      <div class="reward-card status-locked">
+        <div class="reward-sticker">
+          <img src="../../assets/images/stickers/sticker-level-4.png" alt="Sticker">
+        </div>
+        <div class="reward-info">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
+            <div>
+              <div class="reward-level-tag">⭐ Level 4</div>
+              <h3 class="reward-title">Cosmic Fox</h3>
+            </div>
+            <div class="reward-badge badge-locked">
+              <i class="ph ph-lock"></i>
+              Locked
+            </div>
+          </div>
+          <p class="reward-desc">Unlock at Level 4</p>
+          <div class="reward-progress">
+            <div class="reward-progress-bar">
+              <div class="reward-progress-fill" style="width: 65%;"></div>
+            </div>
+            <div class="reward-progress-text">65 / 100 EXP</div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Scripts for the modal -->
+<script src="../../js/components/modal.js"></script>

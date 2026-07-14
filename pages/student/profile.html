@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Profile</title>
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  <link rel="stylesheet" href="../../css/components/button.css">
+
+  <!-- Page Specific Styles -->
+  <link rel="stylesheet" href="../../css/student/profile.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body>
+
+  <div class="container profile-page" id="profilePageContainer">
+
+    <!-- ========== HEADER ========== -->
+    <header class="profile-header">
+      <h1 class="profile-header__title">Profil</h1>
+    </header>
+
+    <!-- ========== AVATAR SECTION ========== -->
+    <section class="avatar-section">
+      <div class="avatar-container">
+        <div class="avatar-wrapper auth-avatar-trigger" id="avatarInteractive">
+          <!-- Using absolute path or relative based on instructions. assets/images/avatars/avatar-default.png -->
+          <img src="../../assets/images/mascot/mascot-home.png" alt="Tasya Avatar" class="avatar-image">
+          
+          <div class="avatar-edit-btn">
+            <i class="ph ph-pencil-simple edit-icon"></i>
+          </div>
+        </div>
+        <h2 class="profile-name">Tasya</h2>
+      </div>
+    </section>
+
+    <!-- ========== INFORMATION CARDS ========== -->
+    <section class="info-section">
+      
+      <div class="profile-card">
+        <div class="profile-card__content">
+          <div class="profile-card__icon">
+            <i class="ph ph-identification-card" style="font-size: 24px; color: white;"></i>
+          </div>
+          <div class="profile-card__text">
+            <span class="profile-card__label">NISN</span>
+            <span class="profile-card__value">2060314905</span>
+          </div>
+        </div>
+        <div class="profile-card__arrow">
+          <i class="ph ph-caret-right" style="font-size: 20px; color: white;"></i>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-card__content">
+          <div class="profile-card__icon">
+            <i class="ph ph-user" style="font-size: 24px; color: white;"></i>
+          </div>
+          <div class="profile-card__text">
+            <span class="profile-card__label">Nama Lengkap</span>
+            <span class="profile-card__value">Tasya Melani Tari</span>
+          </div>
+        </div>
+        <div class="profile-card__arrow">
+          <i class="ph ph-caret-right" style="font-size: 20px; color: white;"></i>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-card__content">
+          <div class="profile-card__icon">
+            <i class="ph ph-gender-female" style="font-size: 24px; color: white;"></i>
+          </div>
+          <div class="profile-card__text">
+            <span class="profile-card__label">Gender</span>
+            <span class="profile-card__value">Perempuan</span>
+          </div>
+        </div>
+        <div class="profile-card__arrow">
+          <i class="ph ph-caret-right" style="font-size: 20px; color: white;"></i>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-card__content">
+          <div class="profile-card__icon">
+            <i class="ph ph-users-three" style="font-size: 24px; color: white;"></i>
+          </div>
+          <div class="profile-card__text">
+            <span class="profile-card__label">Kelas</span>
+            <span class="profile-card__value">4A</span>
+          </div>
+        </div>
+        <div class="profile-card__arrow">
+          <i class="ph ph-caret-right" style="font-size: 20px; color: white;"></i>
+        </div>
+      </div>
+
+    </section>
+
+    
+
+  </div>
+
+  <!-- Bottom Navigation (Component Loader) -->
+  <div data-component="../../components/bottom-nav.html"></div>
+
+  <!-- Core Scripts -->
+    <!-- Auth Guard � must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+
+  <!-- Page Scripts -->
+  <script src="../../js/student/profile.js"></script>
+</body>
+</html>

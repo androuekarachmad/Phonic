@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Games Management</title>
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/variables.css">
+  <link rel="stylesheet" href="../../css/global/global.css">
+  <link rel="stylesheet" href="../../css/global/animation.css">
+  
+  <!-- Component -->
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  
+  <!-- Shared Admin Styles -->
+  <link rel="stylesheet" href="../../css/admin/dashboard.css">
+  <link rel="stylesheet" href="../../css/admin/students.css">
+  
+  <!-- Page Specific -->
+  <link rel="stylesheet" href="../../css/admin/games.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body class="admin-body">
+
+  <main class="admin-main">
+    
+    <!-- ░░ TOP SECTION ░░ -->
+    <div class="adm-top-section std-top">
+      
+      <header class="adm-header">
+        <div class="adm-header__left">
+          <button class="adm-icon-btn" onclick="history.back()" aria-label="Kembali">
+            <i class="ph ph-caret-left"></i>
+          </button>
+          <div class="adm-header__text-group">
+            <p class="adm-header__sub">Manajemen</p>
+            <h1 class="adm-header__name">Games</h1>
+          </div>
+        </div>
+      </header>
+
+      <!-- SEARCH -->
+      <div class="adm-search" style="margin-bottom:0; margin-top:var(--space-md);">
+        <i class="ph ph-magnifying-glass adm-search__icon"></i>
+        <input
+          type="search"
+          id="searchInput"
+          class="adm-search__input"
+          placeholder="Cari judul game..."
+          aria-label="Cari"
+        >
+      </div>
+    </div>
+
+    <!-- ░░ CONTENT ░░ -->
+    <div class="adm-content-area" style="padding-top: var(--space-md);">
+      
+      <!-- SUMMARY CARDS -->
+      <div class="gm-summary">
+        <div class="gm-stat-card">
+          <div class="gm-stat-icon" style="color:#3f7cf6; background:rgba(63,124,246,0.1);"><i class="ph-fill ph-game-controller"></i></div>
+          <div>
+            <div class="gm-stat-val" id="statGames">0</div>
+            <div class="gm-stat-lbl">Total Games</div>
+          </div>
+        </div>
+        <div class="gm-stat-card">
+          <div class="gm-stat-icon" style="color:#8b5cf6; background:rgba(139,92,246,0.1);"><i class="ph-fill ph-question"></i></div>
+          <div>
+            <div class="gm-stat-val" id="statQuestions">0</div>
+            <div class="gm-stat-lbl">Total Soal</div>
+          </div>
+        </div>
+        <div class="gm-stat-card">
+          <div class="gm-stat-icon" style="color:#10b981; background:rgba(16,185,129,0.1);"><i class="ph-fill ph-star"></i></div>
+          <div>
+            <div class="gm-stat-val" id="statEasy">0</div>
+            <div class="gm-stat-lbl">Easy</div>
+          </div>
+        </div>
+        <div class="gm-stat-card">
+          <div class="gm-stat-icon" style="color:#ef4444; background:rgba(239,68,68,0.1);"><i class="ph-fill ph-fire"></i></div>
+          <div>
+            <div class="gm-stat-val" id="statHard">0</div>
+            <div class="gm-stat-lbl">Hard</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAME LIST -->
+      <div class="gm-list" id="gameContainer">
+        <!-- Injected via JS -->
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div class="std-empty hidden" id="emptyState">
+        <img src="../../assets/images/mascot/mascot-home.png" alt="Voxy" class="std-empty__img">
+        <h3 class="std-empty__title">Game tidak ditemukan</h3>
+        <p class="std-empty__desc">Ubah kata kunci pencarian Anda.</p>
+      </div>
+
+    </div>
+    <div style="height:40px;"></div>
+  </main>
+
+  <!-- ░░ BOTTOM NAVIGATION ░░ -->
+  <div data-component="../../components/bottom-nav-admin.html"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/games-data.js"></script>
+    <!-- Auth Guard � must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('admin');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+  <script src="../../js/admin/games.js"></script>
+</body>
+</html>

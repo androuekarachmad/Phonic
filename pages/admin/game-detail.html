@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Game Detail</title>
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/variables.css">
+  <link rel="stylesheet" href="../../css/global/global.css">
+  <link rel="stylesheet" href="../../css/global/animation.css">
+  
+  <!-- Shared Admin Styles -->
+  <link rel="stylesheet" href="../../css/admin/dashboard.css">
+  <link rel="stylesheet" href="../../css/admin/students.css">
+  <link rel="stylesheet" href="../../css/admin/games.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body class="admin-body">
+
+  <main class="admin-main">
+    
+    <!-- ░░ TOP SECTION ░░ -->
+    <div class="adm-top-section std-top" style="padding-bottom:var(--space-md);">
+      
+      <header class="adm-header">
+        <div class="adm-header__left">
+          <button class="adm-icon-btn" onclick="history.back()" aria-label="Kembali">
+            <i class="ph ph-caret-left"></i>
+          </button>
+          <div class="adm-header__text-group">
+            <p class="adm-header__sub">Kelola Soal</p>
+            <h1 class="adm-header__name" id="gameTitle">Nama Game</h1>
+          </div>
+        </div>
+        <div class="adm-header__right">
+          <button class="adm-icon-btn" id="btnAddQuestion" aria-label="Tambah Soal">
+            <i class="ph-bold ph-plus"></i>
+          </button>
+        </div>
+      </header>
+
+    </div>
+
+    <!-- ░░ CONTENT ░░ -->
+    <div class="adm-content-area" style="padding-top: var(--space-md);">
+      
+      <!-- FILTERS -->
+      <div class="std-filters" style="margin-bottom: var(--space-lg);">
+        <div class="std-filter-scroll">
+          <button class="std-chip active" data-filter-type="difficulty" data-filter-val="all">Semua Kesulitan</button>
+          <button class="std-chip" data-filter-type="difficulty" data-filter-val="Easy">Easy</button>
+          <button class="std-chip" data-filter-type="difficulty" data-filter-val="Normal">Normal</button>
+          <button class="std-chip" data-filter-type="difficulty" data-filter-val="Hard">Hard</button>
+        </div>
+      </div>
+
+      <!-- QUESTIONS LIST -->
+      <div class="gm-grid" id="questionContainer">
+        <!-- Injected via JS -->
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div class="std-empty hidden" id="emptyState">
+        <img src="../../assets/images/mascot/mascot-home.png" alt="Voxy" class="std-empty__img">
+        <h3 class="std-empty__title">Belum ada soal</h3>
+        <p class="std-empty__desc">Klik tombol + di pojok kanan atas untuk menambahkan soal.</p>
+      </div>
+
+    </div>
+    <div style="height:40px;"></div>
+  </main>
+
+  <!-- ──────────────── MODALS ──────────────── -->
+
+  <!-- ADD/EDIT MODAL -->
+  <div class="gm-modal" id="formModal">
+    <div class="gm-modal__backdrop" id="formBackdrop"></div>
+    <div class="gm-modal__content">
+      <button class="gm-modal__close" id="formClose"><i class="ph ph-x"></i></button>
+      <h3 class="gm-modal__title" id="formTitle">Tambah Soal</h3>
+
+      <form class="gm-form" id="questionForm">
+        <input type="hidden" id="formId">
+
+        <div class="gm-form__group">
+          <label>Kalimat Bahasa Indonesia</label>
+          <input type="text" id="formIndo" class="gm-input" placeholder="Contoh: Ini adalah buku." required>
+        </div>
+
+        <div class="gm-form__group">
+          <label>Jawaban Bahasa Inggris</label>
+          <input type="text" id="formEng" class="gm-input" placeholder="Contoh: This is a book." required>
+          <small style="color:var(--color-text-muted); font-size:11px; margin-top:4px;">Gunakan kalimat lengkap. Kata-kata akan diacak otomatis oleh sistem.</small>
+        </div>
+
+        <div class="gm-form__group">
+          <label>Tingkat Kesulitan (Difficulty)</label>
+          <select id="formDiff" class="gm-input" required>
+            <option value="Easy">Easy (Hijau)</option>
+            <option value="Normal">Normal (Kuning)</option>
+            <option value="Hard">Hard (Merah)</option>
+          </select>
+        </div>
+
+        <div class="gm-form__actions">
+          <button type="button" class="gm-btn-secondary" id="formCancel">Batal</button>
+          <button type="submit" class="gm-btn-primary"><i class="ph-bold ph-floppy-disk"></i> Simpan Soal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div class="gm-modal" id="deleteModal">
+    <div class="gm-modal__backdrop" id="deleteBackdrop"></div>
+    <div class="gm-modal__content gm-modal__content--sm">
+      <div class="gm-modal__icon-alert"><i class="ph-fill ph-trash"></i></div>
+      <h3>Hapus Soal?</h3>
+      <p>Soal ini akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.</p>
+      <div class="gm-form__actions">
+        <button class="gm-btn-secondary" id="btnCancelDelete">Batal</button>
+        <button class="gm-btn-danger" id="btnConfirmDelete">Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Guard � must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('admin');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+    <!-- Scripts -->
+  <script src="../../js/data/games-data.js"></script>
+  <script src="../../js/admin/game-detail.js"></script>
+</body>
+</html>

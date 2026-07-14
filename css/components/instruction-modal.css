@@ -1,0 +1,18 @@
+/* css/components/instruction-modal.css */
+/* Uses base modal classes from modal.css, adding specific overrides if needed */
+
+.instruction-modal-body {
+  padding-bottom: var(--space-xl);
+}
+
+.instruction-image-container {
+  background: radial-gradient(circle, rgba(63, 124, 246, 0.1) 0%, rgba(255,255,255,0) 70%);
+}
+
+.instruction-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: center;
+  padding: 0 var(--space-md);
+  margin-bottom: var(--space-md);
+}

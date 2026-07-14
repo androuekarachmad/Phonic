@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Dengar & Ucapkan!</title>
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../../css/components/button.css">
+  <link rel="stylesheet" href="../../css/components/progress.css">
+  <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/instruction-modal.css">
+
+  <!-- Page Specific Styles -->
+  <link rel="stylesheet" href="../../css/student/dengar-ucapkan.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body>
+
+  <div class="container du-container">
+
+    <!-- Header Section -->
+    <header class="gameplay-header">
+      <button class="icon-btn btn-close" id="closeGameBtn">
+        <i class="ph ph-x"></i>
+      </button>
+
+      <!-- Timer Progress Bar -->
+      <div class="timer-container">
+        <div class="progress-bar-wrapper timer-wrapper">
+          <div class="progress-bar-fill timer-fill" id="timerFill" style="width: 100%;"></div>
+          <span class="timer-text" id="timerText">60s</span>
+        </div>
+      </div>
+
+      <button class="icon-btn btn-help" id="helpBtn">
+        <i class="ph ph-question"></i>
+      </button>
+    </header>
+
+    <!-- Instruction Text -->
+    <div class="question-container">
+      <h2 class="question-text" id="questionText">Listen carefully and use the missing verb to complete the sentence.</h2>
+    </div>
+
+    <!-- Image Area -->
+    <div class="du-image-container">
+      <img id="questionImage" src="" alt="Question Image" class="du-image">
+    </div>
+
+    <!-- Sentence + Choices Card -->
+    <div class="du-card">
+      <div class="du-sentence-row">
+        <i class="ph-fill ph-speaker-high" style="color: var(--color-primary); font-size: 20px; flex-shrink: 0;"></i>
+        <p class="du-sentence" id="sentenceText">Voxy _____ at night.</p>
+      </div>
+
+      <div class="du-choices" id="choicesContainer">
+        <!-- Choice buttons injected via JS -->
+      </div>
+    </div>
+
+    <!-- Mic Footer -->
+    <div class="mic-footer">
+      <div class="sound-wave sound-wave-left" id="waveLeft">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <button class="mic-btn" id="micBtn">
+        <i class="ph-fill ph-microphone"></i>
+      </button>
+
+      <div class="sound-wave sound-wave-right" id="waveRight">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <p class="mic-hint">tap to speak</p>
+
+  </div>
+
+  <!-- Game Complete Modal -->
+  <div id="gameCompleteModal" class="modal-backdrop" style="display: none;">
+    <div class="modal-container" style="text-align: center; padding: 32px 24px; max-width: 320px;">
+      <i class="ph-fill ph-trophy" style="font-size: 64px; color: #fcc419; margin-bottom: 16px;"></i>
+      <h2 style="font-size: 24px; color: var(--color-primary-dark); margin-bottom: 8px;">Luar Biasa!</h2>
+      <p style="color: var(--color-text-muted); margin-bottom: 24px; font-size: 15px;">Kamu telah menyelesaikan semua soal di level ini.</p>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <button id="playAgainBtn" class="btn btn-primary" style="width: 100%; padding: 14px; border-radius: var(--radius-md);">Main Lagi</button>
+        <button id="exitGameBtn" class="btn" style="width: 100%; padding: 14px; border-radius: var(--radius-md); background: #f1f3f5; color: var(--color-text-main); font-weight: 700;">Keluar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instruction Modal Component -->
+  <div data-component="../../components/instruction-modal.html"></div>
+
+  <!-- Data and Core Scripts -->
+  <script src="../../js/data/games.js"></script>
+  <script src="../../js/data/dengar-ucapkan-data.js"></script>
+    <!-- Auth Guard — must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+
+  <!-- Page Scripts -->
+  <script src="../../js/components/instruction-modal.js"></script>
+  <script src="../../js/student/dengar-ucapkan.js"></script>
+</body>
+</html>

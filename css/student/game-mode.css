@@ -1,0 +1,140 @@
+/* css/student/game-mode.css */
+
+body {
+  padding-bottom: 0 !important;
+}
+
+.game-mode-container {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background-color: var(--color-background);
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Header */
+.game-mode-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  margin-top: var(--space-md);
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(63, 124, 246, 0.2);
+  background: var(--color-white);
+  color: var(--color-primary-dark);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin: 0;
+}
+
+/* Slider Section */
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-lg);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.nav-arrow {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.nav-arrow:active {
+  transform: scale(0.9);
+}
+
+.nav-arrow:disabled {
+  color: #dee2e6;
+  cursor: not-allowed;
+}
+
+.mascot-slider {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+}
+
+.mode-mascot-img {
+  width: 220px;
+  max-width: 70vw;
+  max-height: 35vh; /* restrict height so it doesn't push down too much */
+  height: auto;
+  object-fit: contain;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mode-mascot-img.fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Mode Info */
+.mode-info {
+  text-align: center;
+  padding: 0 var(--space-xl);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.mode-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  margin-bottom: var(--space-md);
+  text-transform: capitalize;
+}
+
+.mode-desc {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Action Button */
+.action-container {
+  padding: var(--space-lg);
+  padding-bottom: calc(var(--space-xl) + 20px);
+  flex-shrink: 0;
+}
+
+.btn-start {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+}

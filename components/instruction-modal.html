@@ -1,0 +1,26 @@
+<!-- components/instruction-modal.html -->
+<div id="instructionModal" class="modal-backdrop">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2 class="modal-header__title">Cara Bermain</h2>
+      <button class="modal-close-btn" onclick="closeInstructionPopup()">
+        <i class="ph ph-x"></i>
+      </button>
+    </div>
+    
+    <div class="modal-body sticker-modal-body instruction-modal-body">
+      <div class="sticker-modal-image-container instruction-image-container">
+        <!-- Mascot Placeholder -->
+        <img id="instructionModalMascot" src="../../assets/images/mascot/mascot-home.png" alt="Mascot" class="sticker-modal-image">
+      </div>
+      
+      <p id="instructionModalDesc" class="sticker-modal-desc instruction-desc">
+        Pilih mode untuk melihat cara bermain.
+      </p>
+
+      <button class="btn btn-primary" style="width: 100%; margin-top: 16px;" onclick="startInstructionGame()">
+        Mulai
+      </button>
+    </div>
+  </div>
+</div>

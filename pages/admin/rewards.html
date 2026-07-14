@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Rewards Management</title>
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/variables.css">
+  <link rel="stylesheet" href="../../css/global/global.css">
+  <link rel="stylesheet" href="../../css/global/animation.css">
+  
+  <!-- Component -->
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  
+  <!-- Page Specific -->
+  <link rel="stylesheet" href="../../css/admin/dashboard.css">
+  <link rel="stylesheet" href="../../css/admin/students.css">
+  <link rel="stylesheet" href="../../css/admin/rewards.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body class="admin-body">
+
+  <main class="admin-main">
+    
+    <!-- ─────────────────────────── TOP SECTION ─────────────────────────── -->
+    <div class="adm-top-section std-top">
+      
+      <!-- HEADER -->
+      <header class="adm-header">
+        <div class="adm-header__left">
+          <button class="adm-icon-btn" onclick="history.back()" aria-label="Kembali">
+            <i class="ph ph-caret-left"></i>
+          </button>
+          <div class="adm-header__text-group">
+            <p class="adm-header__sub">Manajemen</p>
+            <h1 class="adm-header__name">Rewards</h1>
+          </div>
+        </div>
+        <div class="adm-header__right">
+          <button class="adm-icon-btn btn-add" id="btnAddReward" aria-label="Tambah Reward">
+            <i class="ph-bold ph-plus"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- SEARCH -->
+      <div class="adm-search" style="margin-bottom:0;">
+        <i class="ph ph-magnifying-glass adm-search__icon"></i>
+        <input
+          type="search"
+          id="searchInput"
+          class="adm-search__input"
+          placeholder="Cari nama reward, kategori, rarity..."
+          aria-label="Cari"
+        >
+      </div>
+    </div>
+
+    <!-- ─────────────────────────── CONTENT AREA ─────────────────────── -->
+    <div class="adm-content-area" style="padding-top: var(--space-md);">
+      
+      <!-- SUMMARY CARDS -->
+      <div class="rw-summary">
+        <div class="rw-stat-card">
+          <div class="rw-stat-val" id="statTotal">0</div>
+          <div class="rw-stat-lbl">Total Reward</div>
+        </div>
+        <div class="rw-stat-card">
+          <div class="rw-stat-val" id="statActive">0</div>
+          <div class="rw-stat-lbl">Aktif / Unlocked</div>
+        </div>
+        <div class="rw-stat-card">
+          <div class="rw-stat-val" id="statLocked">0</div>
+          <div class="rw-stat-lbl">Terkunci</div>
+        </div>
+        <div class="rw-stat-card">
+          <div class="rw-stat-val" id="statLegendary" style="color:#d97706;">0</div>
+          <div class="rw-stat-lbl">Legendary</div>
+        </div>
+      </div>
+
+      <!-- CHIP FILTERS -->
+      <div class="std-filters" style="margin-bottom: var(--space-lg);">
+        <div class="std-filter-scroll">
+          <button class="std-chip active" data-filter-type="status" data-filter-val="all">Semua Status</button>
+          <button class="std-chip" data-filter-type="status" data-filter-val="Unlocked">Unlocked</button>
+          <button class="std-chip" data-filter-type="status" data-filter-val="Locked">Locked</button>
+        </div>
+        <div class="std-filter-scroll">
+          <button class="std-chip active" data-filter-type="rarity" data-filter-val="all">Semua Rarity</button>
+          <button class="std-chip" data-filter-type="rarity" data-filter-val="Common">Common</button>
+          <button class="std-chip" data-filter-type="rarity" data-filter-val="Rare">Rare</button>
+          <button class="std-chip" data-filter-type="rarity" data-filter-val="Epic">Epic</button>
+          <button class="std-chip" data-filter-type="rarity" data-filter-val="Legendary">Legendary</button>
+        </div>
+      </div>
+
+      <!-- LIST CONTAINER -->
+      <div class="rw-grid" id="rewardContainer">
+        <!-- Injected via JS -->
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div class="std-empty hidden" id="emptyState">
+        <img src="../../assets/images/mascot/mascot-home.png" alt="Voxy Bingung" class="std-empty__img">
+        <h3 class="std-empty__title">Belum ada Reward</h3>
+        <p class="std-empty__desc">Tambahkan reward baru atau ubah kata kunci pencarian Anda.</p>
+      </div>
+
+    </div>
+    
+    <div style="height:40px;"></div>
+  </main>
+
+  <!-- ░░ BOTTOM NAVIGATION ░░ -->
+  <div data-component="../../components/bottom-nav-admin.html"></div>
+
+
+  <!-- ─────────────────────────── MODALS ─────────────────────────── -->
+
+  <!-- PREVIEW MODAL -->
+  <div class="rw-modal" id="previewModal">
+    <div class="rw-modal__backdrop" id="previewBackdrop"></div>
+    <div class="rw-modal__content">
+      <button class="rw-modal__close" id="previewClose"><i class="ph ph-x"></i></button>
+      <div class="rw-preview__img-wrap" id="previewBg">
+        <img src="" alt="Thumbnail" id="previewImg">
+      </div>
+      <div class="rw-preview__info">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div>
+            <h3 class="rw-preview__title" id="previewName">Nama Reward</h3>
+            <p class="rw-preview__cat" id="previewCat">Kategori</p>
+          </div>
+          <span class="rw-badge" id="previewRarity">Rarity</span>
+        </div>
+        <p class="rw-preview__desc" id="previewDesc">Deskripsi detail reward.</p>
+        
+        <div class="rw-preview__reqs">
+          <div class="rw-req">
+            <i class="ph-fill ph-star"></i>
+            <div>
+              <span>Min Level</span>
+              <strong id="previewMinLevel">1</strong>
+            </div>
+          </div>
+          <div class="rw-req">
+            <i class="ph-fill ph-lightning"></i>
+            <div>
+              <span>XP Req</span>
+              <strong id="previewXp">100</strong>
+            </div>
+          </div>
+          <div class="rw-req">
+            <i class="ph-fill ph-lock-key"></i>
+            <div>
+              <span>Status</span>
+              <strong id="previewStatus">Unlocked</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD/EDIT MODAL -->
+  <div class="rw-modal" id="formModal">
+    <div class="rw-modal__backdrop" id="formBackdrop"></div>
+    <div class="rw-modal__content">
+      <button class="rw-modal__close" id="formClose"><i class="ph ph-x"></i></button>
+      
+      <div class="rw-modal__header">
+        <h3 id="formTitle">Tambah Reward</h3>
+      </div>
+      
+      <form class="rw-form" id="rewardForm">
+        <input type="hidden" id="formId">
+        
+        <div class="rw-form__group">
+          <label>Thumbnail Reward</label>
+          <div class="rw-form__upload">
+            <i class="ph ph-image"></i>
+            <span>Upload Gambar (Simulasi)</span>
+          </div>
+        </div>
+
+        <div class="rw-form__group">
+          <label>Nama Reward</label>
+          <input type="text" id="formName" class="rw-input" placeholder="Masukkan nama reward..." required>
+        </div>
+
+        <div class="rw-form__row">
+          <div class="rw-form__group">
+            <label>Kategori</label>
+            <select id="formCategory" class="rw-input" required>
+              <option value="Avatar">Avatar</option>
+              <option value="Badge">Badge</option>
+              <option value="Sticker">Sticker</option>
+            </select>
+          </div>
+          <div class="rw-form__group">
+            <label>Rarity</label>
+            <select id="formRarity" class="rw-input" required>
+              <option value="Common">Common</option>
+              <option value="Rare">Rare</option>
+              <option value="Epic">Epic</option>
+              <option value="Legendary">Legendary</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="rw-form__row">
+          <div class="rw-form__group">
+            <label>Level Minimum</label>
+            <input type="number" id="formMinLevel" class="rw-input" min="1" required>
+          </div>
+          <div class="rw-form__group">
+            <label>XP Requirement</label>
+            <input type="number" id="formXp" class="rw-input" min="0" required>
+          </div>
+        </div>
+
+        <div class="rw-form__group">
+          <label>Status</label>
+          <select id="formStatus" class="rw-input" required>
+            <option value="Unlocked">Unlocked (Aktif)</option>
+            <option value="Locked">Locked (Dikunci)</option>
+          </select>
+        </div>
+
+        <div class="rw-form__group">
+          <label>Deskripsi</label>
+          <textarea id="formDesc" class="rw-input" rows="3" placeholder="Tuliskan deskripsi reward..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Simpan Reward</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div class="rw-modal" id="deleteModal">
+    <div class="rw-modal__backdrop" id="deleteBackdrop"></div>
+    <div class="rw-modal__content rw-modal__content--small">
+      <div class="rw-modal__icon-alert"><i class="ph-fill ph-warning-circle"></i></div>
+      <h3 style="text-align:center; font-size:18px; margin-bottom:8px;">Hapus Reward?</h3>
+      <p style="text-align:center; font-size:13px; color:var(--color-text-muted); margin-bottom:24px;">Apakah Anda yakin ingin menghapus reward ini secara permanen?</p>
+      
+      <div style="display:flex; gap:12px;">
+        <button class="btn btn-secondary" id="btnCancelDelete" style="flex:1;">Batal</button>
+        <button class="btn btn-primary" id="btnConfirmDelete" style="flex:1; background:#ef4444; box-shadow:0 8px 16px rgba(239,68,68,0.25);">Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/rewards-data.js"></script>
+    <!-- Auth Guard � must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('admin');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+  <script src="../../js/admin/rewards.js"></script>
+</body>
+</html>

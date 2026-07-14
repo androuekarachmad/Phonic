@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Gameplay</title>
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+  
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../../css/components/button.css">
+  <link rel="stylesheet" href="../../css/components/progress.css">
+  <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/instruction-modal.css">
+  
+  <!-- Page Specific Styles -->
+  <link rel="stylesheet" href="../../css/student/game-play.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body>
+
+  <div class="container gameplay-container">
+    
+    <!-- Header Section -->
+    <header class="gameplay-header">
+      <button class="icon-btn btn-close" id="closeGameBtn">
+        <i class="ph ph-x"></i>
+      </button>
+      
+      <!-- Timer Progress Bar -->
+      <div class="timer-container">
+        <div class="progress-bar-wrapper timer-wrapper">
+          <div class="progress-bar-fill timer-fill" id="timerFill" style="width: 100%;"></div>
+          <span class="timer-text" id="timerText">60s</span>
+        </div>
+      </div>
+      
+      <button class="icon-btn btn-help" id="helpBtn">
+        <i class="ph ph-question"></i>
+      </button>
+    </header>
+
+    <!-- Question Section -->
+    <div class="question-container">
+      <h2 class="question-text" id="questionText">"Voxy sedang belajar bahasa Inggris"</h2>
+    </div>
+
+    <!-- Mascot Image -->
+    <div class="gameplay-mascot-container">
+      <!-- Mascot changes based on mode or question, using placeholder -->
+      <img src="../../assets/images/mascot/mascot-game.png" alt="Mascot" class="gameplay-mascot">
+    </div>
+
+    <!-- Sentence Slots (Target) -->
+    <div class="slots-container" id="sentenceSlots">
+      <!-- Empty slots will be injected via JS -->
+    </div>
+
+    <!-- Word Bank -->
+    <div class="word-bank-container">
+      <div class="word-bank" id="wordBank">
+        <!-- Word buttons injected via JS -->
+      </div>
+    </div>
+
+    <!-- Check Button -->
+    <div class="action-container">
+      <button class="btn btn-primary btn-check" id="checkBtn" disabled>Periksa</button>
+    </div>
+
+  </div>
+
+  <!-- Instruction Modal Component -->
+  <div data-component="../../components/instruction-modal.html"></div>
+
+  <!-- Data and Core Scripts -->
+  <script src="../../js/data/games.js"></script>
+    <!-- Auth Guard — must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+  
+  <!-- Page Scripts -->
+  <script src="../../js/components/instruction-modal.js"></script>
+  <script src="../../js/student/game-play.js"></script>
+</body>
+</html>

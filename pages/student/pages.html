@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Book Reader</title>
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+  
+  <!-- Page Specific Styles -->
+  <link rel="stylesheet" href="../../css/student/pages.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body class="reader-body">
+
+  <div class="reader-container" id="readerContainer">
+    
+    <!-- ========== HEADER ========== -->
+    <header class="reader-header">
+      <button class="btn-circular" onclick="closeReader()" aria-label="Close">
+        <i class="ph ph-x"></i>
+      </button>
+      <button class="btn-circular" id="btnAudio" aria-label="Audio Toggle" style="display: none;">
+        <i class="ph ph-speaker-high"></i>
+      </button>
+    </header>
+
+    <!-- ========== CONTENT AREA ========== -->
+    <main class="reader-content" id="readerContent">
+      <div class="page-wrapper" id="pageWrapper">
+        <img src="" alt="Book Page" class="page-image" id="pageImage" onerror="this.src='../../assets/images/mascot/mascot-happy.png'">
+        <!-- Vocabulary overlay hitboxes will be injected here -->
+        <div class="page-overlays" id="pageOverlays"></div>
+      </div>
+      
+      <!-- Audio Player for Song Type -->
+      <div class="audio-player-container" id="audioPlayerContainer" style="display: none;">
+        <div class="audio-player">
+          <button class="audio-btn" id="audioPrev"><i class="ph-fill ph-rewind"></i></button>
+          <button class="audio-btn play-btn" id="audioPlay"><i class="ph-fill ph-play-circle"></i></button>
+          <button class="audio-btn" id="audioNext"><i class="ph-fill ph-fast-forward"></i></button>
+        </div>
+        <div class="audio-msg" id="audioMsg"></div>
+        <audio id="html5Audio"></audio>
+      </div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="reader-footer">
+      <button class="btn-circular" id="btnPrev" aria-label="Previous Page">
+        <i class="ph ph-caret-left"></i>
+      </button>
+      
+      <div class="page-indicator">
+        <span id="currentPageNum">1</span>/<span id="totalPagesNum">1</span>
+      </div>
+      
+      <button class="btn-circular" id="btnNext" aria-label="Next Page">
+        <i class="ph ph-caret-right"></i>
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- Vocabulary Popup (Component Loader) -->
+  <div data-component="../../components/popup-vocabulary.html"></div>
+
+  <!-- Core Scripts -->
+    <!-- Auth Guard — must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+  
+  <!-- Data Layer -->
+  <script src="../../js/data/books.js"></script>
+
+  <!-- Page Scripts -->
+  <script src="../../js/student/pages.js"></script>
+</body>
+</html>

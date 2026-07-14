@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Daftar Akun - PHONIC</title>
+  <link rel="icon" href="assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/global/variables.css">
+  <link rel="stylesheet" href="css/global/global.css">
+  <link rel="stylesheet" href="css/components/card.css">
+  <link rel="stylesheet" href="css/components/form.css">
+  <link rel="stylesheet" href="css/components/button.css">
+  <link rel="stylesheet" href="css/components/toast.css">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <div class="auth-wrapper">
+    <div class="auth-card" style="padding-top: 32px; padding-bottom: 36px;">
+
+      <div class="auth-header" style="margin-bottom: 24px;">
+        <img src="assets/images/logo/phonic_name_logo.png" alt="PHONIC Logo" class="auth-logo" style="height: 38px; margin-bottom: 12px;">
+        <h1 class="auth-title" style="font-size: 20px;">Daftar Akun Siswa</h1>
+      </div>
+
+      <form id="signupForm" novalidate>
+
+        <!-- NISN (used as username) -->
+        <div class="form-group" style="margin-bottom:14px;">
+          <label class="form-label" for="nisn">NISN</label>
+          <div class="input-wrapper">
+            <i class="ph-fill ph-identification-card input-icon"></i>
+            <input type="text" id="nisn" class="form-input" placeholder="Masukkan NISN" autocomplete="username" inputmode="numeric">
+          </div>
+        </div>
+
+        <!-- Full Name -->
+        <div class="form-group" style="margin-bottom:14px;">
+          <label class="form-label" for="name">Nama Lengkap</label>
+          <div class="input-wrapper">
+            <i class="ph-fill ph-user input-icon"></i>
+            <input type="text" id="name" class="form-input" placeholder="Contoh: Tasya Melani Tari" autocomplete="name">
+          </div>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group" style="margin-bottom:14px;">
+          <label class="form-label" for="gender">Jenis Kelamin</label>
+          <div class="select-wrapper">
+            <i class="ph-fill ph-gender-intersex input-icon"></i>
+            <select id="gender" class="form-select">
+              <option value="" disabled selected>Pilih Jenis Kelamin</option>
+              <option value="L">Laki-laki</option>
+              <option value="P">Perempuan</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Class -->
+        <div class="form-group" style="margin-bottom:14px;">
+          <label class="form-label" for="classRoom">Kelas</label>
+          <div class="select-wrapper">
+            <i class="ph-fill ph-chalkboard-teacher input-icon"></i>
+            <select id="classRoom" class="form-select">
+              <option value="" disabled selected>Pilih Kelas</option>
+              <option value="4A">4A</option>
+              <option value="4B">4B</option>
+              <option value="5A">5A</option>
+              <option value="5B">5B</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group" style="margin-bottom:24px;">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-wrapper">
+            <i class="ph-fill ph-lock-key input-icon"></i>
+            <input type="password" id="password" class="form-input" placeholder="Buat Password" autocomplete="new-password">
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-auth" id="signupBtn">
+          <i class="ph-fill ph-user-plus"></i> Daftar
+        </button>
+
+        <p class="form-helper" style="margin-top: 16px;">
+          Sudah punya akun? <a href="login.html" class="form-link">Masuk di sini</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data/users.js"></script>
+  <script src="js/core/auth.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Already logged in → redirect
+      if (Auth.isLoggedIn()) {
+        Auth.redirectByRole();
+        return;
+      }
+
+      const form      = document.getElementById('signupForm');
+      const signupBtn = document.getElementById('signupBtn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const nisn      = document.getElementById('nisn').value.trim();
+        const name      = document.getElementById('name').value.trim();
+        const gender    = document.getElementById('gender').value;
+        const classRoom = document.getElementById('classRoom').value;
+        const password  = document.getElementById('password').value;
+
+        // Validation
+        if (!nisn)      { Toast.error('Harap masukkan NISN.'); return; }
+        if (!name)      { Toast.error('Harap masukkan nama lengkap.'); return; }
+        if (!gender)    { Toast.error('Harap pilih jenis kelamin.'); return; }
+        if (!classRoom) { Toast.error('Harap pilih kelas.'); return; }
+        if (!password)  { Toast.error('Harap buat password.'); return; }
+        if (password.length < 6) { Toast.error('Password minimal 6 karakter.'); return; }
+
+        signupBtn.classList.add('loading');
+
+        try {
+          const user = await Auth.register({
+            username: nisn,   // NISN is used as username
+            password,
+            name,
+            nisn,
+            class: classRoom,
+            gender
+          });
+          Toast.success(`Pendaftaran berhasil! Halo, ${user.name} 🎉`);
+          setTimeout(() => {
+            window.location.href = 'pages/student/home.html';
+          }, 1000);
+        } catch (err) {
+          Toast.error(err.message || 'Pendaftaran gagal. Coba lagi.');
+          signupBtn.classList.remove('loading');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

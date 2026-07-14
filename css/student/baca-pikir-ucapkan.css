@@ -1,0 +1,225 @@
+/* css/student/baca-pikir-ucapkan.css */
+
+body {
+  padding-bottom: 0 !important;
+}
+
+.bpu-container {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background: linear-gradient(180deg, #f0f6ff 0%, #e0efff 100%);
+  overflow: hidden;
+}
+
+/* ---- Header (reuse gameplay-header styles) ---- */
+.gameplay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  flex-shrink: 0;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(63, 124, 246, 0.2);
+  background: var(--color-white);
+  color: var(--color-primary-dark);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover { background: var(--color-primary-light); }
+
+.timer-container { flex: 1; padding: 0 var(--space-md); }
+
+.timer-wrapper {
+  background: rgba(63, 124, 246, 0.12);
+  border-radius: var(--radius-pill);
+  height: 32px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg, #4dabf7 0%, #339af0 100%);
+  border-radius: var(--radius-pill);
+  transition: width 1s linear;
+}
+
+.timer-fill.danger { background: linear-gradient(90deg, #ff6b6b 0%, #fa5252 100%); }
+
+.timer-text {
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+/* ---- Question Text ---- */
+.question-container {
+  padding: var(--space-sm) var(--space-xl);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.question-text {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  line-height: 1.4;
+}
+
+/* ---- Image ---- */
+.bpu-image-container {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-sm) var(--space-lg);
+}
+
+.bpu-image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 24px rgba(18, 30, 56, 0.15);
+}
+
+/* ---- Letter Blanks ---- */
+.blanks-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: var(--space-md) var(--space-lg);
+  flex-shrink: 0;
+}
+
+.blank-char {
+  width: 32px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  border-bottom: 2.5px solid #adb5bd;
+  padding-bottom: 2px;
+  min-height: 36px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: border-color 0.3s;
+}
+
+.blank-char.revealed {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  animation: pop-in 0.3s ease;
+}
+
+.blank-char.separator {
+  border-bottom: none;
+  width: 16px;
+}
+
+@keyframes pop-in {
+  0%   { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+/* ---- Mic Footer ---- */
+.mic-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: var(--space-md) var(--space-lg) var(--space-sm);
+  flex-shrink: 0;
+}
+
+.mic-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4dabf7, #228be6);
+  color: var(--color-white);
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(34, 139, 230, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  flex-shrink: 0;
+}
+
+.mic-btn:active, .mic-btn.listening {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(34, 139, 230, 0.6);
+}
+
+.mic-btn.listening {
+  background: linear-gradient(135deg, #ff6b6b, #fa5252);
+  animation: mic-pulse 1s ease-in-out infinite;
+}
+
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(250, 82, 82, 0.4); }
+  50%       { box-shadow: 0 0 0 12px rgba(250, 82, 82, 0); }
+}
+
+/* Sound wave bars */
+.sound-wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 32px;
+}
+
+.sound-wave span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: #adb5bd;
+  height: 8px;
+  transition: height 0.2s;
+}
+
+.sound-wave.active span:nth-child(1) { animation: wave 0.9s ease-in-out infinite; }
+.sound-wave.active span:nth-child(2) { animation: wave 0.9s ease-in-out 0.15s infinite; }
+.sound-wave.active span:nth-child(3) { animation: wave 0.9s ease-in-out 0.3s infinite; }
+.sound-wave.active span:nth-child(4) { animation: wave 0.9s ease-in-out 0.15s infinite; }
+.sound-wave.active span:nth-child(5) { animation: wave 0.9s ease-in-out infinite; }
+
+.sound-wave.active span { background: var(--color-primary); }
+
+@keyframes wave {
+  0%, 100% { height: 6px; }
+  50%       { height: 24px; }
+}
+
+.mic-hint {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding-bottom: calc(var(--space-xl) + 4px);
+  flex-shrink: 0;
+}

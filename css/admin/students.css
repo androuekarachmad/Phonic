@@ -1,0 +1,244 @@
+/* css/admin/students.css */
+
+/* ─────────────────────────────────────────────────────────
+   TOP SECTION ADJUSTMENTS
+   ───────────────────────────────────────────────────────── */
+.std-top {
+  padding-bottom: var(--space-lg); /* less padding since no banner */
+}
+
+/* ─────────────────────────────────────────────────────────
+   FILTERS
+   ───────────────────────────────────────────────────────── */
+.std-filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.std-filter-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding-bottom: 4px; /* for scrollbar */
+  margin: 0 calc(var(--space-md) * -1); /* Full bleed */
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+  scrollbar-width: none;
+}
+.std-filter-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.std-chip {
+  flex: 0 0 auto;
+  background: var(--color-white);
+  border: 1px solid rgba(63, 124, 246, 0.15);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.std-chip:hover {
+  background: #f8faff;
+  color: var(--color-primary-dark);
+}
+.std-chip.active {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(63, 124, 246, 0.25);
+}
+
+/* ─────────────────────────────────────────────────────────
+   CONTAINER (Mobile First Flex -> Desktop Grid)
+   ───────────────────────────────────────────────────────── */
+.std-container {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile: 1 column */
+  gap: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .std-container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   STUDENT CARD
+   ───────────────────────────────────────────────────────── */
+.std-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-md);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(63, 124, 246, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: all var(--transition-fast);
+}
+
+.std-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(63, 124, 246, 0.1);
+  border-color: rgba(63, 124, 246, 0.15);
+}
+
+/* Top: Avatar & Info */
+.std-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.std-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-white);
+  flex-shrink: 0;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1);
+}
+
+.std-info {
+  flex: 1;
+  min-width: 0;
+}
+.std-info__name {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-text-main);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.std-info__nisn {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+/* Middle: Tags (Kelas, Level) */
+.std-tags {
+  display: flex;
+  gap: 6px;
+}
+.std-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  color: #475569;
+}
+.std-tag.kelas {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+.std-tag.level {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+.std-tag.sticker {
+  background: rgba(139, 92, 246, 0.1);
+  color: #7c3aed;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* Middle: Progress */
+.std-progress-wrap {
+  margin-top: 4px;
+}
+.std-progress-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--color-text-main);
+}
+.std-progress-bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.std-progress-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-pill);
+  transition: width 0.5s ease;
+}
+
+/* Bottom: Action */
+.std-action {
+  margin-top: 4px;
+  padding-top: var(--space-sm);
+  border-top: 1px dashed rgba(0,0,0,0.05);
+}
+.std-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius-lg);
+  border: none;
+  background: #f8faff;
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.std-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ─────────────────────────────────────────────────────────
+   EMPTY STATE
+   ───────────────────────────────────────────────────────── */
+.std-empty {
+  text-align: center;
+  padding: var(--space-xxl) var(--space-md);
+  animation: fadeIn 0.3s ease;
+}
+.std-empty.hidden {
+  display: none;
+}
+.std-empty__img {
+  width: 120px;
+  height: auto;
+  margin-bottom: var(--space-lg);
+  filter: grayscale(0.2) opacity(0.8);
+}
+.std-empty__title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-text-main);
+  margin-bottom: 8px;
+}
+.std-empty__desc {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  max-width: 250px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

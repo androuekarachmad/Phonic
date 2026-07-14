@@ -1,0 +1,150 @@
+/* components/card.css */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  box-shadow: 0 2px 10px rgba(43, 63, 108, 0.05); /* Softer shadow */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.card--glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(43, 63, 108, 0.08); /* Softer shadow */
+  border-radius: var(--radius-sm); /* smaller radius */
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.student-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: var(--space-sm);
+  width: 90%;
+  padding: 10px 12px;
+}
+
+.student-card .label {
+  font-size: 9px;
+  color: var(--color-primary-dark);
+  opacity: 0.7;
+}
+
+.student-card .value {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.sticker-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: visible; /* Allow image to overflow the thin container */
+  flex-shrink: 0;
+  width: 90px;
+  height: 10px; /* Restored to the thin track design */
+  margin: var(--space-xs) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sticker-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain; /* Don't crop the sticker */
+  position: absolute;
+  top: 90%;
+  left: 50%; /* Center properly! 0% caused the left cutoff */
+  transform: translate(-50%, -50%);
+}
+
+/* Auth Card (Sign In / Sign Up) */
+.auth-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background circles */
+.auth-wrapper::before,
+.auth-wrapper::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.auth-wrapper::before {
+  width: 300px;
+  height: 300px;
+  background-color: rgba(103, 161, 255, 0.4);
+  top: -100px;
+  left: -100px;
+}
+
+.auth-wrapper::after {
+  width: 400px;
+  height: 400px;
+  background-color: rgba(139, 92, 246, 0.3);
+  bottom: -150px;
+  right: -100px;
+}
+
+.auth-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 16px 40px rgba(43, 63, 108, 0.1);
+  border-radius: 32px;
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 1;
+  animation: slide-up 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-logo {
+  height: 48px;
+  margin: 0 auto 16px;
+  object-fit: contain;
+}
+
+.auth-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+.auth-mascot {
+  position: absolute;
+  width: 80px;
+  top: -40px;
+  right: -20px;
+  animation: float 4s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes slide-up {
+  0% { transform: translateY(40px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}

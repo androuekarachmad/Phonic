@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Stickers Collection</title>
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  <link rel="stylesheet" href="../../css/components/modal.css">
+
+  <!-- Page Specific Styles -->
+  <link rel="stylesheet" href="../../css/student/stickers.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body>
+
+  <div class="container stickers-page">
+
+    <!-- ========== HEADER ========== -->
+    <header class="stickers-header">
+      <h1 class="stickers-header__title">Stickers Collection</h1>
+      <p class="stickers-header__subtitle">Collect stickers by completing missions and levels.</p>
+    </header>
+
+    <!-- ========== COLLECTION SUMMARY ========== -->
+    <section class="summary-section">
+      <div class="summary-card">
+        <div class="summary-main">
+          <div class="summary-main__info">
+            <span class="summary-main__label">Total Sticker Collected</span>
+            <span class="summary-main__value">4 / 120</span>
+          </div>
+          <div class="summary-progress">
+            <div class="summary-progress__bar">
+              <!-- Using inline width to mock data, CSS handles transition -->
+              <div class="summary-progress__fill" style="width: 3.33%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="summary-breakdown">
+          <div class="breakdown-item">
+            <span class="breakdown-badge badge-rare">Rare</span>
+            <span class="breakdown-count">2</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-badge badge-epic">Epic</span>
+            <span class="breakdown-count">1</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-badge badge-legendary">Legendary</span>
+            <span class="breakdown-count">1</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FILTERS ========== -->
+    <section class="filter-section">
+      <div class="filter-scroll-container" id="stickerFilters">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="collected">Collected</button>
+        <button class="filter-chip" data-filter="locked">Locked</button>
+        <button class="filter-chip" data-filter="rare">Rare</button>
+        <button class="filter-chip" data-filter="epic">Epic</button>
+        <button class="filter-chip" data-filter="legendary">Legendary</button>
+      </div>
+    </section>
+
+    <!-- ========== STICKER GRID ========== -->
+    <section class="grid-section">
+      <div class="sticker-grid" id="stickerGrid">
+        
+        <!-- Sticker Card 1: Rare (Collected) -->
+        <div class="album-card sticker-item" data-category="collected rare" data-name="Blue Galaxy" data-rarity="Rare" data-desc="A beautiful galaxy fox from Level 2." data-img="../../assets/images/stickers/sticker-rare-1.png" data-how-to-get="Unlock at Level 2">
+          <div class="album-card__image-wrapper">
+            <img src="../../assets/images/stickers/sticker-rare-1.png" alt="Sticker">
+          </div>
+          <div class="album-card__info">
+            <div class="album-badge badge-rare">Rare</div>
+            <h3 class="album-title">Blue Galaxy</h3>
+          </div>
+        </div>
+
+        <!-- Sticker Card 2: Rare (Collected) -->
+        <div class="album-card sticker-item" data-category="collected rare" data-name="Chef Fox" data-rarity="Rare" data-desc="A smart little chef who cooks delicious words." data-img="../../assets/images/stickers/sticker-rare-2.png" data-how-to-get="Unlock at Level 3">
+          <div class="album-card__image-wrapper">
+            <img src="../../assets/images/stickers/sticker-rare-2.png" alt="Sticker">
+          </div>
+          <div class="album-card__info">
+            <div class="album-badge badge-rare">Rare</div>
+            <h3 class="album-title">Chef Fox</h3>
+          </div>
+        </div>
+
+        <!-- Sticker Card 3: Epic (Collected) -->
+        <div class="album-card sticker-item" data-category="collected epic" data-name="Star Rider" data-rarity="Epic" data-desc="Flies through the universe finding new vocabularies." data-img="../../assets/images/stickers/sticker-epic-1.png" data-how-to-get="Complete 10 Daily Quests">
+          <div class="album-card__image-wrapper">
+            <img src="../../assets/images/stickers/sticker-epic-1.png" alt="Sticker">
+          </div>
+          <div class="album-card__info">
+            <div class="album-badge badge-epic">Epic</div>
+            <h3 class="album-title">Star Rider</h3>
+          </div>
+        </div>
+        
+        <!-- Sticker Card 4: Legendary (Collected) -->
+        <div class="album-card sticker-item" data-category="collected legendary" data-name="Cosmic King" data-rarity="Legendary" data-desc="The ultimate master of the Phonic galaxy." data-img="../../assets/images/stickers/sticker-legendary-1.png" data-how-to-get="Reach Level 100">
+          <div class="album-card__image-wrapper">
+            <img src="../../assets/images/stickers/sticker-legendary-1.png" alt="Sticker">
+          </div>
+          <div class="album-card__info">
+            <div class="album-badge badge-legendary">Legendary</div>
+            <h3 class="album-title">Cosmic King</h3>
+          </div>
+        </div>
+        
+        <!-- Sticker Card 5: Locked -->
+        <div class="album-card sticker-item locked" data-category="locked rare" data-name="Mystery Sticker" data-rarity="Rare" data-desc="Keep playing to reveal this hidden sticker." data-img="../../assets/images/stickers/sticker-locked.png" data-how-to-get="Unlock at Level 10">
+          <div class="album-card__image-wrapper">
+            <img src="../../assets/images/stickers/sticker-locked.png" alt="Sticker">
+          </div>
+          <div class="album-card__info">
+            <div class="album-badge badge-locked">
+              <i class="ph ph-lock-key"></i> Locked
+            </div>
+            <h3 class="album-title">Mystery</h3>
+          </div>
+        </div>
+
+        <!-- Sticker Card 6: Locked -->
+        <div class="album-card sticker-item locked" data-category="locked epic" data-name="Mystery Sticker" data-rarity="Epic" data-desc="Keep playing to reveal this hidden sticker." data-img="../../assets/images/stickers/sticker-locked.png" data-how-to-get="Complete a Special Quest">
+          <div class="album-card__image-wrapper">
+            <img src="../../assets/images/stickers/sticker-locked.png" alt="Sticker">
+          </div>
+          <div class="album-card__info">
+            <div class="album-badge badge-locked">
+              <i class="ph ph-lock-key"></i> Locked
+            </div>
+            <h3 class="album-title">Mystery</h3>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Bottom Navigation (Component Loader) -->
+  <div data-component="../../components/bottom-nav.html"></div>
+  
+  <!-- Sticker Popup Modal (Component Loader) -->
+  <div data-component="../../components/sticker-modal.html"></div>
+
+  <!-- Core Scripts -->
+    <!-- Auth Guard — must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+
+  <!-- Page Scripts -->
+  <script src="../../js/student/stickers.js"></script>
+</body>
+</html>

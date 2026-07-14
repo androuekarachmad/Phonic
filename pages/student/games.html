@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Games</title>
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+  
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../../css/components/button.css">
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  
+  <!-- Page Specific Styles -->
+  <link rel="stylesheet" href="../../css/student/games.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body>
+
+  <div class="container games-container">
+    
+    <!-- Header Section -->
+    <header class="games-header">
+      <a href="home.html" class="icon-btn btn-back">
+        <i class="ph ph-caret-left"></i>
+      </a>
+      <h1 class="page-title">Games</h1>
+      <button class="icon-btn btn-favorite">
+        <i class="ph ph-star"></i>
+      </button>
+    </header>
+
+    <!-- Search Section -->
+    <div class="search-container">
+      <div class="search-bar">
+        <i class="ph ph-magnifying-glass"></i>
+        <input type="text" id="gameSearch" placeholder="Search">
+      </div>
+    </div>
+
+    <!-- Games Carousel Section -->
+    <div class="carousel-container" id="gameCarousel">
+      <!-- Game cards will be injected here via JS -->
+    </div>
+
+    <!-- Pagination Dots -->
+    <div class="carousel-pagination" id="carouselPagination">
+      <!-- Dots injected via JS -->
+    </div>
+
+    <p class="swipe-hint">Swipe to choose a game you want to play!</p>
+
+  </div>
+
+  <!-- Auth Guard — must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  
+  <!-- Data and Core Scripts -->
+  <script src="../../js/data/games.js"></script>
+  <script src="../../js/student/games.js"></script>
+</body>
+</html>

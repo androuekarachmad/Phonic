@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Home</title>
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/global.css">
+  
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../../css/components/card.css">
+  <link rel="stylesheet" href="../../css/components/button.css">
+  <link rel="stylesheet" href="../../css/components/progress.css">
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  
+  <!-- Page Specific Styles -->
+  <link rel="stylesheet" href="../../css/student/home.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Header Section -->
+    <header class="home-header">
+      <div class="header-content">
+        <!-- Level Badge -->  
+        <div class="level-badge">
+          <i class="ph-fill ph-star" style="font-size: 24px; color: #f59f00;"></i>
+          <div class="level-text">
+            <span class="level-title">Level 1</span>
+            <span class="level-subtitle">Keep learning!</span>
+          </div>
+        </div>
+        
+        <!-- Greeting -->
+        <h1 class="greeting-title">Hi, Tasya!</h1>
+        <p class="greeting-subtitle">Let's learn and have fun together</p>
+        
+        <!-- Student Card -->
+        <div class="card card--glass student-card">
+          <span class="label">Name:</span>
+          <span class="value">Tasya Melani Tari</span>
+          <span class="label">Class:</span>
+          <span class="value">4A</span>
+        </div>
+      </div>
+      
+      <!-- Mascot -->
+      <div class="mascot-container">
+        <!-- Replace mascot-home.png placeholder -->
+        <img src="../../assets/images/mascot/mascot-home.png" alt="PHONIC Mascot">
+      </div>
+    </header>
+
+    <!-- Sticker Section -->
+    <section class="section-stickers">
+      <div class="card">
+        <div class="section-header">
+          <h2 class="section-title">My Sticker</h2>
+          <a href="stickers.html" class="btn btn-text">See all</a>
+        </div>
+        
+        <!-- Horizontal Scroll Stickers -->
+        <div class="sticker-scroll-container">
+          <!-- Replace sticker placeholders -->
+          <div class="sticker-card"><img src="../../assets/images/stickers/sticker_rare1.png" alt="Sticker 1"></div>
+          <div class="sticker-card"><img src="../../assets/images/stickers/sticker_rare2.png" alt="Sticker 2"></div>
+          <div class="sticker-card"><img src="../../assets/images/stickers/sticker_epic.png" alt="Sticker 3"></div>
+          <div class="sticker-card"><img src="../../assets/images/stickers/sticker_legendary.png" alt="Sticker 4"></div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-section">
+          <div class="progress-container">
+            <div class="progress-bar-wrapper">
+              <div class="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+            <span class="progress-text">0 / Collected</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banners Section -->
+    <section class="section-banners">
+      <a href="books.html" class="banner">
+        <!-- Replace books-banner.png placeholder -->
+        <img src="../../assets/images/backgrounds/books-banner.png" alt="Books">
+      </a>
+      <a href="games.html" class="banner">
+        <!-- Replace games-banner.png placeholder -->
+        <img src="../../assets/images/backgrounds/games-banner.png" alt="Games">
+      </a>
+    </section>
+
+  </div>
+
+  <!-- Bottom Navigation Component Loader Placeholder -->
+  <div data-component="../../components/bottom-nav.html"></div>
+
+  <!-- Core Scripts -->
+    <!-- Auth Guard — must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('student');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+  
+  <!-- Page Scripts -->
+  <script src="../../js/student/home.js"></script>
+</body>
+</html>

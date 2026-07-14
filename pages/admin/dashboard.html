@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC – Admin Dashboard</title>
+
+  <!-- Global Design System -->
+  <link rel="stylesheet" href="../../css/global/variables.css">
+  <link rel="stylesheet" href="../../css/global/global.css">
+  <link rel="stylesheet" href="../../css/global/animation.css">
+
+  <!-- Component -->
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+
+  <!-- Page -->
+  <link rel="stylesheet" href="../../css/admin/dashboard.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body class="admin-body">
+
+  <!-- ░░ SCROLLABLE CONTENT ░░ -->
+  <main class="admin-main">
+
+    <!-- ─────────────────────────── TOP SECTION (Unified Blue Background) ─────────────────────────── -->
+    <div class="adm-top-section">
+      <!-- ─────────────────────────── HEADER ─────────────────────────── -->
+      <header class="adm-header">
+        <div class="adm-header__left">
+          <div class="adm-header__text-group">
+            <p class="adm-header__sub">Selamat datang kembali,</p>
+            <h1 class="adm-header__name">Halo, Tasya</h1>
+          </div>
+        </div>
+        <div class="adm-header__right">
+          <button class="adm-icon-btn" id="notifBtn" aria-label="Notifikasi">
+            <i class="ph ph-bell"></i>
+            <span class="notif-badge" id="notifBadge">3</span>
+          </button>
+          <div class="adm-avatar auth-avatar-trigger" aria-label="Admin">T</div>
+        </div>
+      </header>
+
+      <!-- ─────────────────────────── SEARCH ─────────────────────────── -->
+      <div class="adm-search">
+        <i class="ph ph-magnifying-glass adm-search__icon"></i>
+        <input
+          type="search"
+          class="adm-search__input"
+          placeholder="Cari siswa, NISN, atau kelas..."
+          aria-label="Cari"
+        >
+      </div>
+
+      <!-- ─────────────────────────── HERO CONTENT ─────────────────────── -->
+      <section class="adm-hero" aria-label="Banner Dashboard">
+        <div class="adm-hero__content">
+          <p class="adm-hero__eyebrow">Admin PHONIC</p>
+          <h2 class="adm-hero__headline">Kelola aktivitas<br>belajar siswa<br>dengan mudah.</h2>
+          <button class="adm-hero__btn">
+            Lihat Ringkasan <i class="ph ph-arrow-right"></i>
+          </button>
+        </div>
+        <div class="adm-hero__mascot">
+          <img src="../../assets/images/mascot/maskot-admin.png " alt="Voxy" class="adm-hero__mascot-img">
+        </div>
+      </section>
+    </div>
+
+    <!-- ─────────────────────────── WHITE CONTENT AREA ─────────────────────── -->
+    <div class="adm-content-area">
+
+    <!-- ─────────────────────────── QUICK ACTIONS ─────────────────────── -->
+    <section class="adm-section">
+      <div class="adm-section__header">
+        <h2 class="adm-section__title">Menu Utama</h2>
+      </div>
+      <div class="adm-quick-grid">
+        <a href="students.html" class="adm-quick-card ripple" id="qa-students">
+          <div class="adm-quick-card__icon" style="--qa-color:#3f7cf6; --qa-bg:rgba(63,124,246,0.12);">
+            <i class="ph-fill ph-users-three"></i>
+          </div>
+          <span class="adm-quick-card__label">Data Siswa</span>
+        </a>
+        <a href="books.html" class="adm-quick-card ripple" id="qa-books">
+          <div class="adm-quick-card__icon" style="--qa-color:#10b981; --qa-bg:rgba(16,185,129,0.12);">
+            <i class="ph-fill ph-books"></i>
+          </div>
+          <span class="adm-quick-card__label">Books</span>
+        </a>
+        <a href="games.html" class="adm-quick-card ripple" id="qa-games">
+          <div class="adm-quick-card__icon" style="--qa-color:#f59e0b; --qa-bg:rgba(245,158,11,0.12);">
+            <i class="ph-fill ph-game-controller"></i>
+          </div>
+          <span class="adm-quick-card__label">Games</span>
+        </a>
+        <a href="rewards.html" class="adm-quick-card ripple" id="qa-rewards">
+          <div class="adm-quick-card__icon" style="--qa-color:#8b5cf6; --qa-bg:rgba(139,92,246,0.12);">
+            <i class="ph-fill ph-gift"></i>
+          </div>
+          <span class="adm-quick-card__label">Rewards</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── STATISTICS ─────────────────────── -->
+    <section class="adm-section">
+      <div class="adm-section__header">
+        <h2 class="adm-section__title">Statistik</h2>
+        <div class="adm-filter-chip">
+          <i class="ph ph-calendar-blank"></i>
+          <span>Minggu Ini</span>
+          <i class="ph ph-caret-down"></i>
+        </div>
+      </div>
+
+      <div class="adm-stats-scroll">
+        <div class="adm-stat-card" style="--sc:var(--color-primary);">
+          <div class="adm-stat-card__top">
+            <div class="adm-stat-card__icon"><i class="ph-fill ph-users-three"></i></div>
+            <span class="adm-stat-card__trend up"><i class="ph-bold ph-trend-up"></i> +4%</span>
+          </div>
+          <div class="adm-stat-card__num">152</div>
+          <div class="adm-stat-card__label">Total Siswa</div>
+        </div>
+        <div class="adm-stat-card" style="--sc:#10b981;">
+          <div class="adm-stat-card__top">
+            <div class="adm-stat-card__icon"><i class="ph-fill ph-book-open"></i></div>
+            <span class="adm-stat-card__trend up"><i class="ph-bold ph-trend-up"></i> +12%</span>
+          </div>
+          <div class="adm-stat-card__num">25<span class="adm-stat-card__unit">mnt</span></div>
+          <div class="adm-stat-card__label">Waktu Membaca</div>
+        </div>
+        <div class="adm-stat-card" style="--sc:#f59e0b;">
+          <div class="adm-stat-card__top">
+            <div class="adm-stat-card__icon"><i class="ph-fill ph-game-controller"></i></div>
+            <span class="adm-stat-card__trend down"><i class="ph-bold ph-trend-down"></i> -2%</span>
+          </div>
+          <div class="adm-stat-card__num">25<span class="adm-stat-card__unit">mnt</span></div>
+          <div class="adm-stat-card__label">Waktu Bermain</div>
+        </div>
+        <div class="adm-stat-card" style="--sc:#8b5cf6;">
+          <div class="adm-stat-card__top">
+            <div class="adm-stat-card__icon"><i class="ph-fill ph-user-check"></i></div>
+            <span class="adm-stat-card__trend up"><i class="ph-bold ph-trend-up"></i> +7%</span>
+          </div>
+          <div class="adm-stat-card__num">140</div>
+          <div class="adm-stat-card__label">Siswa Aktif</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── CHART ─────────────────────────── -->
+    <section class="adm-section">
+      <div class="adm-section__header">
+        <div>
+          <h2 class="adm-section__title">Aktivitas Membaca</h2>
+          <p class="adm-section__sub">Total menit per hari</p>
+        </div>
+        <div class="adm-filter-chip">
+          <span>Minggu Ini</span>
+          <i class="ph ph-caret-down"></i>
+        </div>
+      </div>
+
+      <div class="adm-chart-card">
+        <div class="adm-chart-wrap">
+          <canvas id="readingChart"></canvas>
+        </div>
+        <div class="adm-chart-summary">
+          <div class="adm-chart-stat">
+            <div class="adm-chart-stat__val">13 <span>(47%)</span></div>
+            <div class="adm-chart-stat__lbl">Di atas rata-rata</div>
+          </div>
+          <div class="adm-divider-v"></div>
+          <div class="adm-chart-stat">
+            <div class="adm-chart-stat__val success">+20%</div>
+            <div class="adm-chart-stat__lbl">Peningkatan tertinggi</div>
+          </div>
+          <div class="adm-divider-v"></div>
+          <div class="adm-chart-stat">
+            <div class="adm-chart-stat__val danger">-0%</div>
+            <div class="adm-chart-stat__lbl">Penurunan tertinggi</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── AKTIVITAS HARIAN ─────────────────────── -->
+    <section class="adm-section">
+      <div class="adm-section__header">
+        <h2 class="adm-section__title">Aktivitas Harian</h2>
+        <div class="adm-section__actions">
+          <button class="adm-text-btn"><i class="ph-bold ph-plus"></i> Tambah</button>
+        </div>
+      </div>
+
+      <!-- Bento Grid -->
+      <div class="adm-bento">
+
+        <!-- Progress -->
+        <div class="adm-bento__card adm-bento__card--progress">
+          <div class="adm-bento__head">
+            <span class="adm-bento__eyebrow">Misi Harian</span>
+            <div class="adm-badge blue">75%</div>
+          </div>
+          <div class="adm-circular-wrap">
+            <svg class="adm-circular" viewBox="0 0 80 80">
+              <circle class="adm-circular__bg" cx="40" cy="40" r="32"/>
+              <circle class="adm-circular__val" id="progressCircle" cx="40" cy="40" r="32"/>
+            </svg>
+            <div class="adm-circular__pct" id="progressPct">75%</div>
+          </div>
+          <p class="adm-bento__sub">dari total misi</p>
+        </div>
+
+        <!-- Countdown -->
+        <div class="adm-bento__card adm-bento__card--countdown">
+          <div class="adm-bento__head">
+            <span class="adm-bento__eyebrow">Reset Misi</span>
+            <i class="ph ph-clock" style="color:var(--color-primary);"></i>
+          </div>
+          <p class="adm-bento__desc">Diperbarui otomatis pukul 00:00 WIB</p>
+          <div class="adm-countdown">
+            <div class="adm-countdown__item"><span id="cdH">--</span><label>Jam</label></div>
+            <span class="adm-countdown__sep">:</span>
+            <div class="adm-countdown__item"><span id="cdM">--</span><label>Menit</label></div>
+            <span class="adm-countdown__sep">:</span>
+            <div class="adm-countdown__item"><span id="cdS">--</span><label>Detik</label></div>
+          </div>
+        </div>
+
+        <!-- Misi Harian -->
+        <div class="adm-bento__card adm-bento__card--missions">
+          <div class="adm-bento__head">
+            <span class="adm-bento__eyebrow">Misi Harian</span>
+            <div class="adm-badge blue"><i class="ph-bold ph-list-checks"></i></div>
+          </div>
+          <ul class="adm-mission-list" id="dailyMissions"></ul>
+        </div>
+
+        <!-- Misi Spesial -->
+        <div class="adm-bento__card adm-bento__card--special">
+          <div class="adm-bento__head">
+            <span class="adm-bento__eyebrow">Misi Spesial</span>
+            <div class="adm-badge yellow"><i class="ph-bold ph-star"></i></div>
+          </div>
+          <ul class="adm-mission-list" id="specialMissions"></ul>
+        </div>
+
+      </div>
+    </section>
+
+    </div> <!-- End adm-content-area -->
+
+    <!-- Bottom spacer for nav -->
+    <div style="height:24px;"></div>
+  </main>
+
+  <!-- ░░ NOTIFICATION MODAL ░░ -->
+  <div class="notif-modal" id="notifModal" role="dialog" aria-modal="true" aria-label="Notifikasi">
+    <div class="notif-modal__backdrop" id="notifBackdrop"></div>
+    <div class="notif-modal__panel">
+      <!-- Handle bar -->
+      <div class="notif-modal__handle"></div>
+
+      <div class="notif-modal__header">
+        <h2 class="notif-modal__title">Notifikasi</h2>
+        <button class="notif-modal__close" id="notifClose" aria-label="Tutup">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <!-- NOTIFICATION LIST (populated by JS) -->
+      <div class="notif-list" id="notifList"></div>
+
+      <!-- EMPTY STATE (shown when no notifications) -->
+      <div class="notif-empty hidden" id="notifEmpty">
+        <img src="../../assets/images/mascot/mascot-home.png" alt="Voxy" class="notif-empty__img">
+        <p class="notif-empty__text">Belum ada notifikasi baru.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░░ BOTTOM NAVIGATION ░░ -->
+  <div data-component="../../components/bottom-nav-admin.html"></div>
+
+  <!-- Scripts -->
+    <!-- Auth Guard � must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('admin');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+  <script src="../../js/admin/dashboard.js"></script>
+</body>
+</html>

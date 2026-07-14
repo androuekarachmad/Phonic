@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Detail Siswa</title>
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/variables.css">
+  <link rel="stylesheet" href="../../css/global/global.css">
+  <link rel="stylesheet" href="../../css/global/animation.css">
+  
+  <!-- Component -->
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  
+  <!-- Page Specific -->
+  <link rel="stylesheet" href="../../css/admin/student-detail.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body class="admin-body">
+
+  <main class="admin-main">
+    
+    <!-- ─────────────────────────── HEADER ─────────────────────────── -->
+    <header class="detail-header">
+      <button class="icon-btn back-btn" onclick="history.back()" aria-label="Kembali">
+        <i class="ph ph-arrow-left"></i>
+      </button>
+      <h1 class="detail-header__title">Detail Siswa</h1>
+      <button class="icon-btn more-btn" aria-label="Lainnya">
+        <i class="ph ph-dots-three-vertical"></i>
+      </button>
+    </header>
+
+    <div id="dashboardContent" class="detail-content hidden">
+      <!-- ─────────────────────────── PROFILE HEADER ─────────────────────────── -->
+      <section class="profile-section fade-in">
+        <div class="profile-avatar" id="detailAvatar">A</div>
+        <h2 class="profile-name" id="detailName">Nama Siswa</h2>
+        <p class="profile-nisn" id="detailNisn">NISN: -</p>
+        
+        <div class="profile-badges">
+          <span class="badge badge-kelas" id="detailKelas">Kelas -</span>
+          <span class="badge badge-level" id="detailLevel"><i class="ph-fill ph-star"></i> Level -</span>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────── SUMMARY GRID ─────────────────────────── -->
+      <section class="summary-section slide-up">
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="summary-icon books"><i class="ph-fill ph-books"></i></div>
+            <div class="summary-val" id="statBooks">0</div>
+            <div class="summary-lbl">Books Read</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-icon games"><i class="ph-fill ph-game-controller"></i></div>
+            <div class="summary-val" id="statGames">0</div>
+            <div class="summary-lbl">Games Played</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-icon rewards"><i class="ph-fill ph-gift"></i></div>
+            <div class="summary-val" id="statRewards">0</div>
+            <div class="summary-lbl">Rewards</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-icon stickers"><i class="ph-fill ph-sticker"></i></div>
+            <div class="summary-val" id="statStickers">0</div>
+            <div class="summary-lbl">Sticker</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────── PROGRESS ─────────────────────────── -->
+      <section class="card-section slide-up" style="animation-delay: 0.1s;">
+        <div class="detail-card">
+          <div class="card-header">
+            <h3>Progress Menuju Level <span id="nextLevel">2</span></h3>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-info">
+              <span>XP Terkumpul</span>
+              <span class="progress-pct" id="xpPct">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="xpFill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────── STICKER COLLECTION ─────────────────────────── -->
+      <section class="card-section slide-up" style="animation-delay: 0.2s;">
+        <div class="section-title">
+          <h3>Koleksi Stiker</h3>
+          <button class="text-btn">Lihat Semua</button>
+        </div>
+        <div class="sticker-scroll" id="stickerContainer">
+          <!-- Injected by JS -->
+        </div>
+      </section>
+
+      <!-- ─────────────────────────── ACTIVITIES ─────────────────────────── -->
+      <section class="card-section slide-up" style="animation-delay: 0.3s;">
+        <div class="activity-grid">
+          
+          <!-- Book Activity -->
+          <div class="detail-card activity-card">
+            <div class="card-header">
+              <div class="header-icon books"><i class="ph-fill ph-book-open"></i></div>
+              <h3>Aktivitas Buku</h3>
+            </div>
+            <div class="activity-content">
+              <p class="activity-lbl">Buku Terakhir</p>
+              <h4 class="activity-val" id="lastBook">-</h4>
+              <div class="activity-stats">
+                <div class="act-stat">
+                  <span>Halaman</span>
+                  <strong id="bookPages">-</strong>
+                </div>
+                <div class="act-stat">
+                  <span>Waktu Baca</span>
+                  <strong id="bookTime">-</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Game Activity -->
+          <div class="detail-card activity-card">
+            <div class="card-header">
+              <div class="header-icon games"><i class="ph-fill ph-game-controller"></i></div>
+              <h3>Aktivitas Game</h3>
+            </div>
+            <div class="activity-content">
+              <p class="activity-lbl">Game Terakhir</p>
+              <h4 class="activity-val" id="lastGame">-</h4>
+              <div class="activity-stats">
+                <div class="act-stat">
+                  <span>Skor Terbaik</span>
+                  <strong id="gameScore">-</strong>
+                </div>
+                <div class="act-stat">
+                  <span>Total Main</span>
+                  <strong id="gamePlays">-</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ─────────────────────────── MISSIONS ─────────────────────────── -->
+      <section class="card-section slide-up" style="animation-delay: 0.4s;">
+        <div class="detail-card">
+          <div class="card-header">
+            <h3>Misi Sedang Berjalan</h3>
+          </div>
+          <div class="mission-list" id="missionList">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────── RECENT ACTIVITY (TIMELINE) ─────────────────────────── -->
+      <section class="card-section slide-up" style="animation-delay: 0.5s;">
+        <div class="detail-card">
+          <div class="card-header">
+            <h3>Riwayat Aktivitas</h3>
+          </div>
+          <div class="timeline" id="timelineList">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────── ACTION BUTTONS ─────────────────────────── -->
+      <section class="action-section fade-in" style="animation-delay: 0.6s;">
+        <button class="btn btn-primary"><i class="ph-bold ph-pencil-simple"></i> Edit Data Siswa</button>
+        <button class="btn btn-secondary" onclick="history.back()">Kembali ke Data Siswa</button>
+      </section>
+    </div>
+
+    <!-- ─────────────────────────── EMPTY STATE ─────────────────────────── -->
+    <div id="emptyState" class="detail-empty hidden fade-in">
+      <img src="../../assets/images/mascot/mascot-home.png" alt="Voxy Bingung" class="empty-img">
+      <h3 class="empty-title">Data Siswa Tidak Ditemukan</h3>
+      <p class="empty-desc">Siswa yang Anda cari tidak ada di dalam database atau ID salah.</p>
+      <button class="btn btn-primary" onclick="history.back()">Kembali ke Data Siswa</button>
+    </div>
+
+    <div style="height:40px;"></div>
+  </main>
+
+  <!-- ░░ BOTTOM NAVIGATION ░░ -->
+  <div data-component="../../components/bottom-nav-admin.html"></div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/students-data.js"></script>
+    <!-- Auth Guard � must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('admin');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+  <script src="../../js/admin/student-detail.js"></script>
+</body>
+</html>

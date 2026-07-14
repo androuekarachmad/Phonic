@@ -1,0 +1,352 @@
+/* components/modal.css */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 30, 56, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Initial hidden state */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-container {
+  background-color: var(--color-white);
+  width: 90%;
+  max-width: 480px;
+  max-height: 85vh;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(18, 30, 56, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  
+  /* Initial hidden state for scale animation */
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-backdrop.show .modal-container {
+  transform: scale(1);
+}
+
+/* Modal Header */
+.modal-header {
+  padding: var(--space-lg);
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid rgba(63, 124, 246, 0.1);
+  background: linear-gradient(180deg, #f5f9ff 0%, #ffffff 100%);
+}
+
+.modal-header__icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--space-sm);
+  background: var(--color-primary-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-header__icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.modal-header__title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  margin-bottom: 4px;
+}
+
+.modal-header__subtitle {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: rgba(18, 30, 56, 0.05);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(18, 30, 56, 0.1);
+  transform: scale(1.1);
+}
+
+.modal-close-btn:active {
+  transform: scale(0.9);
+}
+
+/* Modal Body */
+.modal-body {
+  padding: var(--space-lg);
+  overflow-y: auto;
+  
+  /* Hide scrollbar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.modal-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Reward Card */
+.reward-card {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(63, 124, 246, 0.1);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  box-shadow: 0 4px 12px rgba(63, 124, 246, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.reward-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(63, 124, 246, 0.1);
+}
+
+.reward-card:active {
+  transform: translateY(0);
+}
+
+.reward-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Status Variations */
+.reward-card.status-locked {
+  background: #f8f9fa;
+  border-color: #eaedf2;
+  box-shadow: none;
+}
+
+.reward-card.status-locked .reward-sticker {
+  filter: grayscale(100%) opacity(0.5);
+}
+
+.reward-sticker {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  margin-right: var(--space-md);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: filter 0.3s ease;
+}
+
+.reward-sticker img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.reward-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.reward-level-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.reward-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  margin-bottom: 2px;
+}
+
+.reward-desc {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* Reward Progress */
+.reward-progress {
+  width: 100%;
+}
+
+.reward-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #eaedf2;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.reward-progress-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-pill);
+}
+
+.reward-progress-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* Reward Badges */
+.reward-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-locked {
+  background: #f1f3f5;
+  color: #868e96;
+}
+
+.badge-claimed {
+  background: #e3fafc;
+  color: #0ca678;
+}
+
+.badge-claim {
+  background: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: 0 2px 8px rgba(63, 124, 246, 0.3);
+}
+
+.reward-badge img {
+  width: 12px;
+  height: 12px;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .modal-container {
+    width: 600px;
+    max-width: 90%;
+  }
+}
+
+/* =============================================
+   Sticker Modal Specific Styles
+   ============================================= */
+.sticker-modal-body {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.sticker-modal-image-container {
+  width: 160px;
+  height: 160px;
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(circle, var(--color-primary-light) 0%, rgba(255,255,255,0) 70%);
+}
+
+.sticker-modal-image {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+  animation: float-sticker 3s ease-in-out infinite;
+}
+
+@keyframes float-sticker {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.sticker-modal-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  margin-bottom: var(--space-xs);
+}
+
+.sticker-modal-desc {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.sticker-modal-meta {
+  background: #f8f9fa;
+  width: 100%;
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.meta-label {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.meta-value {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}

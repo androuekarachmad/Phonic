@@ -1,0 +1,160 @@
+/* css/student/books.css */
+
+/* ========== PAGE ========== */
+.books-page {
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* ========== HEADER ========== */
+.books-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+}
+
+.books-header__btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid #dfe4ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.books-header__btn:hover {
+  background: #f1f5f9;
+  border-color: #c4cdd9;
+}
+
+.books-header__title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #8896ab;
+  letter-spacing: 0.3px;
+}
+
+/* ========== BOOK GRID ========== */
+.books-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 20px 24px;
+}
+
+/* ========== BOOK CARD ========== */
+.book-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.book-card:active {
+  transform: scale(0.96);
+}
+
+/* Book Title */
+.book-card__title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* 3D Book Cover */
+.book-card__cover-wrapper {
+  position: relative;
+  width: 220px;
+  margin-bottom: 20px;
+}
+
+.book-card__cover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 6px 14px 14px 6px;
+  background-color: #f19f2a;
+  box-shadow:
+    5px 5px 15px rgba(0, 0, 0, 0.12),
+    inset 3px 0 8px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 2;
+}
+
+/* Book pages (right side effect) */
+.book-card__cover-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: -7px;
+  width: 10px;
+  height: calc(100% - 8px);
+  background: linear-gradient(to right, #f5f5f5, #e8e8e8);
+  border-radius: 0 3px 3px 0;
+  border-right: 1px solid #d4d4d4;
+  z-index: 1;
+}
+
+/* Book pages (bottom side effect) */
+.book-card__cover-wrapper::before {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 6px;
+  width: calc(100% - 6px);
+  height: 10px;
+  background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+  border-radius: 0 0 3px 3px;
+  border-bottom: 1px solid #d4d4d4;
+  z-index: 1;
+}
+
+/* Dots Indicator */
+.book-card__dots {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.book-card__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #bdd4f7;
+}
+
+.book-card__dot--active {
+  background: #3b82f6;
+}
+
+/* Author */
+.book-card__author {
+  font-size: 14px;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.5;
+  max-width: 260px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (min-width: 768px) {
+  .books-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../../assets/images/logo/Phonic_logo.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHONIC - Books Management</title>
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../../css/global/variables.css">
+  <link rel="stylesheet" href="../../css/global/global.css">
+  <link rel="stylesheet" href="../../css/global/animation.css">
+  
+  <!-- Component -->
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  
+  <!-- Shared Admin Styles -->
+  <link rel="stylesheet" href="../../css/admin/dashboard.css">
+  <link rel="stylesheet" href="../../css/admin/students.css">
+  
+  <!-- Page Specific -->
+  <link rel="stylesheet" href="../../css/admin/books.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../../css/components/toast.css">
+  <link rel="stylesheet" href="../../css/components/logout-modal.css">
+</head>
+<body class="admin-body">
+
+  <main class="admin-main">
+    
+    <!-- ░░ TOP SECTION ░░ -->
+    <div class="adm-top-section std-top">
+      
+      <header class="adm-header">
+        <div class="adm-header__left">
+          <button class="adm-icon-btn" onclick="history.back()" aria-label="Kembali">
+            <i class="ph ph-caret-left"></i>
+          </button>
+          <div class="adm-header__text-group">
+            <p class="adm-header__sub">Manajemen</p>
+            <h1 class="adm-header__name">Books</h1>
+          </div>
+        </div>
+        <div class="adm-header__right">
+          <button class="adm-icon-btn" id="btnAddBook" aria-label="Tambah Buku">
+            <i class="ph-bold ph-plus"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="adm-search" style="margin-bottom:0;">
+        <i class="ph ph-magnifying-glass adm-search__icon"></i>
+        <input
+          type="search"
+          id="searchInput"
+          class="adm-search__input"
+          placeholder="Cari judul, penulis, atau kelas..."
+          aria-label="Cari"
+        >
+      </div>
+    </div>
+
+    <!-- ░░ CONTENT ░░ -->
+    <div class="adm-content-area" style="padding-top: var(--space-md);">
+      
+      <!-- SUMMARY -->
+      <div class="bk-summary">
+        <div class="bk-stat-card">
+          <div class="bk-stat-icon all"><i class="ph-fill ph-books"></i></div>
+          <div>
+            <div class="bk-stat-val" id="statTotal">0</div>
+            <div class="bk-stat-lbl">Total Buku</div>
+          </div>
+        </div>
+        <div class="bk-stat-card">
+          <div class="bk-stat-icon published"><i class="ph-fill ph-book-open"></i></div>
+          <div>
+            <div class="bk-stat-val" id="statPublished">0</div>
+            <div class="bk-stat-lbl">Published</div>
+          </div>
+        </div>
+        <div class="bk-stat-card">
+          <div class="bk-stat-icon draft"><i class="ph-fill ph-note-pencil"></i></div>
+          <div>
+            <div class="bk-stat-val" id="statDraft">0</div>
+            <div class="bk-stat-lbl">Draft</div>
+          </div>
+        </div>
+        <div class="bk-stat-card">
+          <div class="bk-stat-icon popular"><i class="ph-fill ph-star"></i></div>
+          <div>
+            <div class="bk-stat-val" id="statPopular">0</div>
+            <div class="bk-stat-lbl">Populer</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="std-filters" style="margin-bottom: var(--space-lg);">
+        <div class="std-filter-scroll">
+          <button class="std-chip active" data-filter-type="kelas" data-filter-val="all">Semua Kelas</button>
+          <button class="std-chip" data-filter-type="kelas" data-filter-val="1">Kelas 1</button>
+          <button class="std-chip" data-filter-type="kelas" data-filter-val="2">Kelas 2</button>
+          <button class="std-chip" data-filter-type="kelas" data-filter-val="3">Kelas 3</button>
+          <button class="std-chip" data-filter-type="kelas" data-filter-val="4">Kelas 4</button>
+        </div>
+        <div class="std-filter-scroll">
+          <button class="std-chip active" data-filter-type="status" data-filter-val="all">Semua Status</button>
+          <button class="std-chip" data-filter-type="status" data-filter-val="Published">Published</button>
+          <button class="std-chip" data-filter-type="status" data-filter-val="Draft">Draft</button>
+        </div>
+      </div>
+
+      <!-- BOOK GRID -->
+      <div class="bk-grid" id="bookContainer"></div>
+
+      <!-- EMPTY STATE -->
+      <div class="std-empty hidden" id="emptyState">
+        <img src="../../assets/images/mascot/mascot-home.png" alt="Voxy" class="std-empty__img">
+        <h3 class="std-empty__title">Belum ada buku ditemukan</h3>
+        <p class="std-empty__desc">Tambahkan buku baru atau ubah kata kunci pencarian.</p>
+      </div>
+
+    </div>
+    <div style="height:40px;"></div>
+  </main>
+
+  <!-- ░░ BOTTOM NAVIGATION ░░ -->
+  <div data-component="../../components/bottom-nav.html"></div>
+
+  <!-- ──────────────── MODALS ──────────────── -->
+
+  <!-- PREVIEW MODAL -->
+  <div class="bk-modal" id="previewModal">
+    <div class="bk-modal__backdrop" id="previewBackdrop"></div>
+    <div class="bk-modal__content">
+      <button class="bk-modal__close" id="previewClose"><i class="ph ph-x"></i></button>
+
+      <div class="bk-preview">
+        <div class="bk-preview__cover" id="previewCoverBg">
+          <img id="previewImg" src="" alt="Cover">
+        </div>
+        <div class="bk-preview__body">
+          <div class="bk-preview__meta">
+            <span class="bk-badge-status" id="previewStatus">Published</span>
+            <span class="bk-badge-cat" id="previewCat">Vocabulary</span>
+          </div>
+          <h3 class="bk-preview__title" id="previewTitle">Judul Buku</h3>
+          <p class="bk-preview__author" id="previewAuthor">Penulis</p>
+          <p class="bk-preview__desc" id="previewDesc">Deskripsi buku.</p>
+          
+          <div class="bk-preview__info-grid">
+            <div class="bk-info-item">
+              <i class="ph-fill ph-chalkboard-teacher"></i>
+              <div>
+                <span>Kelas</span>
+                <strong id="previewKelas">1</strong>
+              </div>
+            </div>
+            <div class="bk-info-item">
+              <i class="ph-fill ph-files"></i>
+              <div>
+                <span>Halaman</span>
+                <strong id="previewPages">0</strong>
+              </div>
+            </div>
+          </div>
+
+          <button class="bk-btn-primary" onclick="alert('Fitur Reader akan segera hadir!')">
+            <i class="ph-bold ph-book-open-text"></i> Buka Reader
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD/EDIT MODAL -->
+  <div class="bk-modal" id="formModal">
+    <div class="bk-modal__backdrop" id="formBackdrop"></div>
+    <div class="bk-modal__content">
+      <button class="bk-modal__close" id="formClose"><i class="ph ph-x"></i></button>
+      <h3 class="bk-modal__title" id="formTitle">Tambah Buku</h3>
+
+      <form class="bk-form" id="bookForm">
+        <input type="hidden" id="formId">
+
+        <div class="bk-form__upload">
+          <i class="ph ph-image-square"></i>
+          <span>Upload Thumbnail Buku</span>
+          <small>(Simulasi - Front-End Only)</small>
+        </div>
+
+        <div class="bk-form__group">
+          <label>Judul Buku</label>
+          <input id="formTitle2" type="text" class="bk-input" placeholder="Masukkan judul buku..." required>
+        </div>
+
+        <div class="bk-form__group">
+          <label>Penulis</label>
+          <input id="formAuthor" type="text" class="bk-input" placeholder="Nama penulis..." required>
+        </div>
+
+        <div class="bk-form__row">
+          <div class="bk-form__group">
+            <label>Kategori</label>
+            <select id="formCategory" class="bk-input" required>
+              <option value="Vocabulary">Vocabulary</option>
+              <option value="Grammar">Grammar</option>
+              <option value="Reading">Reading</option>
+              <option value="Story">Story</option>
+              <option value="Phonics">Phonics</option>
+            </select>
+          </div>
+          <div class="bk-form__group">
+            <label>Kelas</label>
+            <select id="formKelas" class="bk-input" required>
+              <option value="1">Kelas 1</option>
+              <option value="2">Kelas 2</option>
+              <option value="3">Kelas 3</option>
+              <option value="4">Kelas 4</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bk-form__row">
+          <div class="bk-form__group">
+            <label>Jumlah Halaman</label>
+            <input id="formPages" type="number" class="bk-input" min="1" placeholder="32" required>
+          </div>
+          <div class="bk-form__group">
+            <label>Status</label>
+            <select id="formStatus" class="bk-input" required>
+              <option value="Published">Published</option>
+              <option value="Draft">Draft</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bk-form__group">
+          <label>Deskripsi Singkat</label>
+          <textarea id="formDesc" class="bk-input" rows="3" placeholder="Tuliskan deskripsi buku..." required></textarea>
+        </div>
+
+        <div class="bk-form__actions">
+          <button type="button" class="bk-btn-secondary" id="formCancel">Batal</button>
+          <button type="submit" class="bk-btn-primary"><i class="ph-bold ph-floppy-disk"></i> Simpan Buku</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div class="bk-modal" id="deleteModal">
+    <div class="bk-modal__backdrop" id="deleteBackdrop"></div>
+    <div class="bk-modal__content bk-modal__content--sm">
+      <div class="bk-modal__icon-alert"><i class="ph-fill ph-trash"></i></div>
+      <h3>Hapus Buku?</h3>
+      <p>Buku ini akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.</p>
+      <div class="bk-form__actions">
+        <button class="bk-btn-secondary" id="btnCancelDelete">Batal</button>
+        <button class="bk-btn-danger" id="btnConfirmDelete">Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../js/data/books-data.js"></script>
+    <!-- Auth Guard � must load before any page script -->
+  <script src="../../js/data/users.js"></script>
+  <script src="../../js/core/auth.js"></script>
+  <script>Auth.checkRole('admin');</script>
+  <script src="../../js/components/toast.js"></script>
+  <script src="../../js/components/logout-modal.js"></script>
+  <script src="../../js/core/component-loader.js"></script>
+  <script src="../../js/admin/admin-navbar.js"></script>
+  <script src="../../js/admin/books.js"></script>
+</body>
+</html>

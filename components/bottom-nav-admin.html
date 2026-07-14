@@ -1,0 +1,95 @@
+<nav class="bottom-nav" id="bottomNavigationAdmin">
+  <div class="nav-bg-wrapper">
+    <div class="nav-indicator"></div>
+  </div>
+  
+  <a href="dashboard.html" class="bottom-nav-item" data-page="dashboard">
+    <div class="icon-wrapper">
+      <i class="ph ph-squares-four"></i>
+    </div>
+  </a>
+  <a href="students.html" class="bottom-nav-item" data-page="students">
+    <div class="icon-wrapper">
+      <i class="ph ph-users"></i>
+    </div>
+  </a>
+  <a href="books.html" class="bottom-nav-item" data-page="books">
+    <div class="icon-wrapper">
+      <i class="ph ph-books"></i>
+    </div>
+  </a>
+  <a href="games.html" class="bottom-nav-item" data-page="games">
+    <div class="icon-wrapper">
+      <i class="ph ph-game-controller"></i>
+    </div>
+  </a>
+  <a href="rewards.html" class="bottom-nav-item" data-page="rewards">
+    <div class="icon-wrapper">
+      <i class="ph ph-gift"></i>
+    </div>
+  </a>
+  <!-- Adding Mission as well, since we just built it -->
+  <a href="missions.html" class="bottom-nav-item" data-page="missions">
+    <div class="icon-wrapper">
+      <i class="ph ph-clipboard-text"></i>
+    </div>
+  </a>
+</nav>
+
+<style>
+/* Adjust grid for more items if needed */
+.bottom-nav {
+  justify-content: space-evenly !important;
+}
+.bottom-nav-item {
+  min-width: 45px; /* ensure they fit */
+}
+</style>
+
+<script>
+(function() {
+  const nav = document.getElementById('bottomNavigationAdmin');
+  if (!nav) return;
+
+  const path = window.location.pathname;
+  let active = 'dashboard';
+  if (path.includes('students') || path.includes('student-detail')) active = 'students';
+  else if (path.includes('rewards')) active = 'rewards';
+  else if (path.includes('books'))   active = 'books';
+  else if (path.includes('games') || path.includes('game-detail')) active = 'games';
+  else if (path.includes('missions')) active = 'missions';
+
+  const items = nav.querySelectorAll('.bottom-nav-item');
+  const indicator = nav.querySelector('.nav-indicator');
+
+  function setActive(item) {
+    items.forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+    if (indicator) {
+      const navR = nav.getBoundingClientRect();
+      const itemR = item.getBoundingClientRect();
+      const cx = (itemR.left - navR.left) + itemR.width / 2 - indicator.offsetWidth / 2;
+      indicator.style.transform = `translateX(${cx}px)`;
+    }
+  }
+
+  items.forEach(item => {
+    if (item.dataset.page === active) {
+      // Small delay to ensure CSS layout is ready
+      setTimeout(() => setActive(item), 50);
+    }
+    item.addEventListener('click', e => {
+      if (!item.classList.contains('active')) {
+        e.preventDefault();
+        setActive(item);
+        setTimeout(() => { window.location.href = item.getAttribute('href'); }, 300);
+      }
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    const a = nav.querySelector('.bottom-nav-item.active');
+    if (a) setActive(a);
+  });
+})();
+</script>
